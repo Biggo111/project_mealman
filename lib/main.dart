@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:project_mealman/app/core/services/firebase_service.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await FirebaseService.enableFirebase();
   runApp(const MyApp());
 }
 

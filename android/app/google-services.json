@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "983088443275",
+    "project_id": "project-mealman",
+    "storage_bucket": "project-mealman.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983088443275:android:71ba5db80640e8bd51098e",
+        "android_client_info": {
+          "package_name": "com.example.project_mealman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983088443275-stubu99ni677mr4m31evrtt08lq0n0rq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.project_mealman",
+            "certificate_hash": "453b832dc156f0a9ead166fe134edad737eccf48"
+          }
+        },
+        {
+          "client_id": "983088443275-qmcng7iajp18ekjath3ef7d57rmqt90g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQOeIjzS2sAeQg82bqfl5gLv0Xj4B_sjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983088443275-qmcng7iajp18ekjath3ef7d57rmqt90g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
