@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
+import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
 
 class LoginTab extends StatefulWidget {
   const LoginTab({super.key});
@@ -9,6 +11,22 @@ class LoginTab extends StatefulWidget {
 }
 
 class _LoginTabState extends State<LoginTab> {
+
+  final loginEmailController = TextEditingController();
+  final loginPasswordController = TextEditingController();
+
+  void loginUser(){
+    FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+      email: loginEmailController.text,
+      password: loginPasswordController.text,
+      context: context,
+    );
+  }
+  void passwordReset(){
+    FirebaseAuthMethods(FirebaseAuth.instance).forgotPassword(
+      email: loginEmailController.text,
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -30,6 +48,7 @@ class _LoginTabState extends State<LoginTab> {
               ),
             ),
             keyboardType: TextInputType.emailAddress,
+            controller: loginEmailController,
             onChanged: (String value) {},
           ),
           const SizedBox(height: 30,),
@@ -45,7 +64,7 @@ class _LoginTabState extends State<LoginTab> {
                 fontSize: 20,
               ),
             ),
-            keyboardType: TextInputType.emailAddress,
+            controller: loginPasswordController,
             onChanged: (String value) {},
           ),
           Padding(
@@ -60,7 +79,7 @@ class _LoginTabState extends State<LoginTab> {
                   color: Colors.black45,
                 ),
               ),
-              onPressed: (){},
+              onPressed: ()=>passwordReset(),
             ),
           ),
           const SizedBox(
@@ -70,7 +89,7 @@ class _LoginTabState extends State<LoginTab> {
             height: 45,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: (){},
+              onPressed: ()=>loginUser(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.mainColor,
                 shape: RoundedRectangleBorder(

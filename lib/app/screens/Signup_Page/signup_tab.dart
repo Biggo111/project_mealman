@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
+import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
 
 class SignupTab extends StatefulWidget {
   const SignupTab({super.key});
@@ -9,6 +12,27 @@ class SignupTab extends StatefulWidget {
 }
 
 class _SignupTabState extends State<SignupTab> {
+  final signupNameController = TextEditingController();
+  final signupEmailController = TextEditingController();
+  final signupPasswordController = TextEditingController();
+  final signupConfirmpasswordController = TextEditingController();
+  final signupPhonenumberController = TextEditingController();
+
+
+ void signupUser()async{
+  if(signupPasswordController.text.toString()==signupConfirmpasswordController.text.toString()){
+    FirebaseAuthMethods(FirebaseAuth.instance).signupWithEmail(
+      email: signupEmailController.text, 
+      password: signupPasswordController.text,
+      name: signupNameController.text,
+      number: signupPhonenumberController.text,
+      context: context
+    );
+  }
+  else{
+    Logger().i("Confirm password is not matching");
+  }
+}
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -25,6 +49,7 @@ class _SignupTabState extends State<SignupTab> {
               fontSize: 20,
             ),
           ),
+          controller: signupNameController,
           onChanged: (String value) {},
         ),
         const SizedBox(height: 30,),
@@ -40,6 +65,7 @@ class _SignupTabState extends State<SignupTab> {
             ),
           ),
           keyboardType: TextInputType.emailAddress,
+          controller: signupEmailController,
           onChanged: (String value) {},
         ),
         const SizedBox(height: 30,),
@@ -54,6 +80,7 @@ class _SignupTabState extends State<SignupTab> {
               fontSize: 20,
             ),
           ),
+          controller: signupPasswordController,
           onChanged: (String value) {},
         ),
         const SizedBox(height: 30,),
@@ -68,6 +95,7 @@ class _SignupTabState extends State<SignupTab> {
               fontSize: 20,
             ),
           ),
+          controller: signupConfirmpasswordController,
           onChanged: (String value) {},
         ),
         const SizedBox(height: 30,),
@@ -82,6 +110,8 @@ class _SignupTabState extends State<SignupTab> {
               fontSize: 20,
             ),
           ),
+          keyboardType: TextInputType.number,
+          controller: signupPhonenumberController,
           onChanged: (String value) {},
         ),
         const SizedBox(height: 30,),
@@ -89,7 +119,7 @@ class _SignupTabState extends State<SignupTab> {
           height: 45,
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: (){},
+            onPressed: ()=>signupUser(),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.mainColor,
               shape: RoundedRectangleBorder(
