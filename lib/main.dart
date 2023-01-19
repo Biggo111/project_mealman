@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_mealman/app/core/services/firebase_service.dart';
 import 'package:project_mealman/app/screens/Signup_Page/signup_page.dart';
+import 'package:project_mealman/app/screens/global_home_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: SignupPage(),
+      debugShowCheckedModeBanner: false,
+      home: GlobalHomeScreen(),
     );
   }
 }
