@@ -1,4 +1,11 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:project_mealman/app/core/app_colors.dart';
+import 'package:project_mealman/widgets/big_text.dart';
+import 'package:project_mealman/widgets/small_text.dart';
+
+import '../Utils/diamensions.dart';
 
 class SlideView extends StatefulWidget {
   const SlideView({super.key});
@@ -8,42 +15,169 @@ class SlideView extends StatefulWidget {
 }
 
 class _SlideViewState extends State<SlideView> {
+  PageController pageController = PageController(viewportFraction: 0.85);
+  var currentPageValue = 0.0;
+  double scaleFactor = 0.8;
+  double _height = 190;
+  @override
+  void initState() {
+    super.initState();
+    pageController.addListener(() {
+      setState(() {
+        currentPageValue = pageController.page!;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.purple,
-      padding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 2),
-      height: MediaQuery.of(context).size.height/3,
-      child: PageView.builder(
-        itemBuilder: (context, position){
-          return _buildPageItem(position);
-        },
-      ),
-    );
-  }
-  Widget _buildPageItem(int index){
-    return Stack(
+    //Logger().i(MediaQuery.of(context).size.width.toString());
+    return Column(
       children: [
         Container(
-          height: 190,
-          margin: const EdgeInsets.only(left: 10, right: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.amber,
+          //color: Colors.purple,
+          padding:
+              const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 2),
+          height: MediaQuery.of(context).size.height / 3.1,
+          child: PageView.builder(
+            controller: pageController,
+            itemBuilder: (context, position) {
+              return _buildPageItem(position);
+            },
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            height: 140,
-            margin: const EdgeInsets.only(left: 40, right: 40),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Colors.black,
-            ),
+        DotsIndicator(
+          dotsCount: 5,
+          position: currentPageValue,
+          decorator: DotsDecorator(
+            activeColor: AppColors.mainColor,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildPageItem(int index) {
+    Matrix4 matrix = new Matrix4.identity();
+
+    if (index == currentPageValue.floor()) {
+      var currScale = 1 - (currentPageValue - index) * (1 - scaleFactor);
+      var currTrans = _height * (1 - currScale) / 2;
+      matrix = Matrix4.diagonal3Values(1, currScale, 1)
+        ..setTranslationRaw(0, currTrans, 0);
+    } else if (index == currentPageValue.floor() + 1) {
+      var currScale =
+          scaleFactor + (currentPageValue - index + 1) * (1 - scaleFactor);
+      var currTrans = _height * (1 - currScale) / 2;
+      matrix = Matrix4.diagonal3Values(1, currScale, 1);
+      matrix = Matrix4.diagonal3Values(1, currScale, 1)
+        ..setTranslationRaw(0, currTrans, 0);
+    } else if (index == currentPageValue.floor() - 1) {
+      var currScale = 1 - (currentPageValue - index) * (1 - scaleFactor);
+      var currTrans = _height * (1 - currScale) / 2;
+      matrix = Matrix4.diagonal3Values(1, currScale, 1);
+      matrix = Matrix4.diagonal3Values(1, currScale, 1)
+        ..setTranslationRaw(0, currTrans, 0);
+    } else {
+      var currScale = 0.8;
+      matrix = Matrix4.diagonal3Values(1, currScale, 1)
+        ..setTranslationRaw(0, _height * (1 - scaleFactor) / 2, 1);
+    }
+    return Transform(
+      transform: matrix,
+      child: Stack(
+        children: [
+          Container(
+            height: Diamensions.pageviewContainer1,
+            margin: const EdgeInsets.only(left: 10, right: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.amber,
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: Diamensions.pageviewContainer2,
+              margin: const EdgeInsets.only(left: 40, right: 40, bottom: 8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 5.0,
+                      offset: Offset(0, 5),
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(-5, 0),
+                    ),
+                  ]),
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                //height: 140,
+                width: double.maxFinite,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    BigText(text: "Chease Burger"),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // const SizedBox(
+                        //   width: 10,
+                        // ),
+                        Wrap(
+                          children: List.generate(5, (index) {
+                            return Icon(
+                              Icons.star,
+                              color: AppColors.mainColor,
+                              size: 15,
+                            );
+                          }),
+                        ),
+                        // const SizedBox(
+                        //   width: 10,
+                        // ),
+                        SmallText(
+                          text: "4.5",
+                        ),
+                        const SizedBox(
+                          width: 50,
+                        ),
+                        Text(
+                          "Price: 50",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    BigText(text: "Sarah's Restaurent"),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
