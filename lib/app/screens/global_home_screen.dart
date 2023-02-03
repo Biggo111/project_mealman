@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_mealman/app/Home_Page/gridview_item.dart';
 import 'package:project_mealman/app/Home_Page/myappbar.dart';
 import 'package:project_mealman/app/Home_Page/slide_view.dart';
 
@@ -15,10 +16,34 @@ class _GlobalHomeScreenState extends State<GlobalHomeScreen> {
     final screenSize = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        appBar: MyAppBar(screenSize: screenSize,),
+        appBar: MyAppBar(
+          screenSize: screenSize,
+        ),
         body: Column(
           children: [
             SlideView(),
+            // GridView.count(
+            //   crossAxisCount: 2,
+            //   childAspectRatio: 3/2,
+            //   children: List.generate(4, (index) => GridviewItem()),
+            // ),
+            Expanded(
+              //flex: 1,
+              child: GridView.builder(
+                itemCount: 4,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, 
+                    childAspectRatio: 9 / 8
+                  ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    //margin: EdgeInsets.only(top: 12, bottom: 10),
+                    padding: const EdgeInsets.only(top: 18, bottom: 14),
+                    child: GridviewItem()
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),

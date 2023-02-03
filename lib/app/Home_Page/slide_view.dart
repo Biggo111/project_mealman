@@ -18,7 +18,7 @@ class _SlideViewState extends State<SlideView> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var currentPageValue = 0.0;
   double scaleFactor = 0.8;
-  double _height = 190;
+  double _height = Diamensions.pageviewContainer1;
   @override
   void initState() {
     super.initState();
