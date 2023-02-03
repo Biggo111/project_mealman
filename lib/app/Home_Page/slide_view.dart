@@ -45,6 +45,7 @@ class _SlideViewState extends State<SlideView> {
               const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 2),
           height: MediaQuery.of(context).size.height / 3.1,
           child: PageView.builder(
+            itemCount: 5,
             controller: pageController,
             itemBuilder: (context, position) {
               return _buildPageItem(position);
@@ -67,8 +68,8 @@ class _SlideViewState extends State<SlideView> {
   }
 
   Widget _buildPageItem(int index) {
-    Matrix4 matrix = new Matrix4.identity();
-
+    Matrix4 matrix = Matrix4.identity();
+    //Logger().i("index = $index and currentpage = $currentPageValue");
     if (index == currentPageValue.floor()) {
       var currScale = 1 - (currentPageValue - index) * (1 - scaleFactor);
       var currTrans = _height * (1 - currScale) / 2;
