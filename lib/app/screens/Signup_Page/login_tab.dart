@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
 import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
+import 'package:project_mealman/app/screens/global_home_screen.dart';
 
 class LoginTab extends StatefulWidget {
   const LoginTab({super.key});
@@ -89,7 +91,10 @@ class _LoginTabState extends State<LoginTab> {
             height: 45,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: ()=>loginUser(),
+              onPressed: (){
+                loginUser();
+                Get.to(GlobalHomeScreen());
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.mainColor,
                 shape: RoundedRectangleBorder(

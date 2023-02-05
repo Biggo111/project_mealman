@@ -4,6 +4,8 @@ import 'package:project_mealman/app/core/services/firebase_service.dart';
 import 'package:project_mealman/app/screens/Signup_Page/signup_page.dart';
 import 'package:project_mealman/app/screens/global_home_screen.dart';
 
+import 'app/screens/RestaurentEnd/restaurent_home_screen.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseService.enableFirebase();
@@ -16,7 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: GlobalHomeScreen(),
+      //home: SignupPage(),
+      home: RestaurentHomeScreen(),
+      //home: SignupPage(),
+      //home: GlobalHomeScreen(),
     );
   }
 }
