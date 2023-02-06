@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/homesellertab.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/itemstab.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/orderstab.dart';
 
 import '../../Home_Page/myappbar.dart';
+import '../../Utils/diamensions.dart';
 import '../../core/app_colors.dart';
 
 class RestaurentHomeScreen extends StatefulWidget {
@@ -20,6 +22,7 @@ class _RestaurentHomeScreenState extends State<RestaurentHomeScreen>
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
     final restaurentScreenSize = MediaQuery.of(context).size.width;
+    //Logger().i(MediaQuery.of(context).size.height);
     return SafeArea(
       child: Scaffold(
         appBar: MyAppBar(
@@ -29,16 +32,16 @@ class _RestaurentHomeScreenState extends State<RestaurentHomeScreen>
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(Diamensions.paddingAll8),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
+                  borderRadius: BorderRadius.circular(Diamensions.borderRadius40),
                   //border: Border.all(),
                   color: Colors.white,
                 ),
                 child: TabBar(
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(Diamensions.borderRadius40),
                     color: AppColors.mainColor,
                   ),
                   controller: tabController,

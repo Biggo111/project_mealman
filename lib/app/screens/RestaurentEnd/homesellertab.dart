@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_mealman/app/Utils/diamensions.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
 
 class HomeSellerTab extends StatefulWidget {
@@ -12,15 +13,15 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10),
+      padding: EdgeInsets.only(left: Diamensions.paddingOnly, right: Diamensions.paddingOnly),
       child: ListView.builder(itemBuilder: (_, index) {
         return Container(
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.all(10),
-          height: 170,
+          padding: EdgeInsets.all(Diamensions.paddingAll20),
+          margin: EdgeInsets.all(Diamensions.paddingAll10),
+          height: MediaQuery.of(context).size.height/4.818604651162792,
           width: double.infinity,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(Diamensions.borderRadius30),
               color: Colors.white,
               //border: Border.all(),
               boxShadow: const [
@@ -38,37 +39,37 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
             children: [
               Image.asset(
                 "assets/signuppage_images/signupPageBackground.png",
-                width: 60,
-                height: 150,
+                width: Diamensions.containerWidth60,
+                height: Diamensions.containerHeight150,
                 fit: BoxFit.cover,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
+                    padding: EdgeInsets.only(
+                      left: Diamensions.paddingOnly20,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
                           "Rui Fish",
                           style: TextStyle(
                             fontFamily: 'Ubuntu',
-                            fontSize: 30,
+                            fontSize: Diamensions.fontSize30,
                             fontWeight: FontWeight.bold,
                             color: AppColors.mainColor,
                           ),
                         ),
                         SizedBox(
-                          width: 95,
+                          width: Diamensions.sizedBoxWidth95,
                         ),
                         Text(
                           "120tk",
                           style: TextStyle(
                             fontFamily: 'Jua',
-                            fontSize: 16,
+                            fontSize: Diamensions.fontSize16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -76,10 +77,10 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 10,),
-                    margin: const EdgeInsets.only(left: 20),
-                    height: 95,
-                    width: 250,
+                    padding: EdgeInsets.only(top: Diamensions.paddingOnly10,),
+                    margin: EdgeInsets.only(left: Diamensions.paddingOnly20),
+                    height: Diamensions.containerHeight95,
+                    width: Diamensions.containerWidth250,
                     child: const SingleChildScrollView(
                       child: Text(
                         "1 piece fried Rui fish with masala gravy",

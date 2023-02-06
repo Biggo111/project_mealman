@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_mealman/app/Utils/diamensions.dart';
 
 import '../../core/app_colors.dart';
 
@@ -13,15 +14,15 @@ class _OrdersTabState extends State<OrdersTab> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10),
+      padding: EdgeInsets.only(left: Diamensions.paddingOnly10, right: Diamensions.paddingOnly10),
       child: ListView.builder(itemBuilder: (_, index) {
         return Container(
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.all(10),
-          height: 160,
+          padding: EdgeInsets.all(Diamensions.paddingAll20),
+          margin: EdgeInsets.all(Diamensions.paddingAll10),
+          height: Diamensions.containerHeight160,
           width: double.infinity,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(Diamensions.borderRadius30),
               color: Colors.white,
               //border: Border.all(),
               boxShadow: const [
@@ -40,12 +41,12 @@ class _OrdersTabState extends State<OrdersTab> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text(
                     "Arafat Qurashi",
                     style: TextStyle(
                       fontFamily: 'Ubuntu',
-                      fontSize: 20,
+                      fontSize: Diamensions.fontSize20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -53,28 +54,28 @@ class _OrdersTabState extends State<OrdersTab> {
                     "Pending",
                     style: TextStyle(
                       fontFamily: 'Ubuntu',
-                      fontSize: 20,
+                      fontSize: Diamensions.fontSize20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 45,
+                height: Diamensions.sizedBoxHeight45,
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.mainColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
+                      borderRadius: BorderRadius.circular(Diamensions.borderRadius40),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     "See Order",
                     style: TextStyle(
                       fontFamily: 'Ubuntu',
-                      fontSize: 20,
+                      fontSize: Diamensions.fontSize20,
                     ),
                   ),
                 ),
