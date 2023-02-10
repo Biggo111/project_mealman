@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
 import 'package:project_mealman/app/core/services/firebase_service.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/addnewitem.dart';
 import 'package:project_mealman/app/screens/Signup_Page/signup_page.dart';
 import 'package:project_mealman/app/screens/global_home_screen.dart';
 
@@ -31,9 +32,10 @@ class MyApp extends StatelessWidget {
     //Stream documentStream = FirebaseFirestore.instance.collection('Authenticated_User_Info').doc(UserCredential.user.uid).snapshots();
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RestaurentHomeScreen(),
+      //home: RestaurentHomeScreen(),
       //home: SignupPage(),
       //home: GlobalHomeScreen(),
+      home: AddNewItem(),
     );
     // final authMethods = FirebaseAuthMethods(auth);
     // String? userID = authMethods.userID;
