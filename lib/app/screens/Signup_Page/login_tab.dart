@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
 import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/restaurent_home_screen.dart';
 import 'package:project_mealman/app/screens/global_home_screen.dart';
 
 class LoginTab extends StatefulWidget {
@@ -13,22 +17,29 @@ class LoginTab extends StatefulWidget {
 }
 
 class _LoginTabState extends State<LoginTab> {
-
   final loginEmailController = TextEditingController();
   final loginPasswordController = TextEditingController();
-
-  void loginUser(){
-    FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+  String? userType;
+  Future<void>loginUser() async {
+    await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
       email: loginEmailController.text,
       password: loginPasswordController.text,
       context: context,
     );
+    User? user = FirebaseAuth.instance.currentUser;
+    if(user==null){
+      return;
+    }
+    userType = await FirebaseFirestore.instance.collection("Authenticated_User_Info").doc(user.uid).get().then((value)=>value.data()!['userType']);
+    //user = firebaseAuthMethods.userID;
   }
-  void passwordReset(){
+
+  void passwordReset() {
     FirebaseAuthMethods(FirebaseAuth.instance).forgotPassword(
       email: loginEmailController.text,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -53,7 +64,9 @@ class _LoginTabState extends State<LoginTab> {
             controller: loginEmailController,
             onChanged: (String value) {},
           ),
-          const SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           TextField(
             obscureText: true,
             decoration: const InputDecoration(
@@ -81,7 +94,7 @@ class _LoginTabState extends State<LoginTab> {
                   color: Colors.black45,
                 ),
               ),
-              onPressed: ()=>passwordReset(),
+              onPressed: () => passwordReset(),
             ),
           ),
           const SizedBox(
@@ -91,9 +104,16 @@ class _LoginTabState extends State<LoginTab> {
             height: 45,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: (){
-                loginUser();
-                Get.to(GlobalHomeScreen());
+              onPressed: () async{
+                await loginUser();
+                if (userType != null) {
+                  if(userType=='student' || userType=='teacher'){
+                    Get.to(()=>const GlobalHomeScreen());
+                  }
+                  else {
+                    Get.to(()=>const RestaurentHomeScreen());
+                  }
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.mainColor,
