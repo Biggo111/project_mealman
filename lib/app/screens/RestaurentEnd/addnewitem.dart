@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -6,6 +8,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
+import 'package:project_mealman/app/Data/RestaurantEnd%20Repositories/resownerrepository.dart';
 import 'package:project_mealman/app/Modules/RestaurentendModels/item_model.dart';
 
 class AddNewItem extends StatefulWidget {
@@ -23,6 +26,8 @@ class _AddNewItemState extends State<AddNewItem> {
   TextEditingController itemDescriptionController = TextEditingController();
   String imageurl = '';
   XFile? _imageFile;
+  final resOwnerRepository = Get.put(ResOwnerRepository());
+  final _database = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,8 +140,11 @@ class _AddNewItemState extends State<AddNewItem> {
           if (file == null) {
             return;
           }
+          // _imageFile = file;
+          // Logger().i("The image file is $_imageFile");
           setState(() {
             _imageFile = file;
+            Logger().i("The image file is $_imageFile");
           });
           Reference referenceroot = FirebaseStorage.instance.ref();
           Reference referencefirst = referenceroot.child('images');
@@ -148,6 +156,7 @@ class _AddNewItemState extends State<AddNewItem> {
             Logger().i(e);
           }
           if (imageurl.isEmpty) {
+            Logger().i("Image URl is Empty");
             (ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("Add an image")),
             ));
@@ -178,21 +187,25 @@ class _AddNewItemState extends State<AddNewItem> {
             ));
             return;
           }
-          if (imageurl.isEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("Please Upload an Image"),
-            ));
-            return;
-          }
+          // if (imageurl.isEmpty) {
+          //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          //     content: Text("Please Upload an Image"),
+          //   ));
+          //   return;
+          // }
           // creatIteam(iteamControler.text, priceController.text,
           //     quantityController.text,itemDescriptionController.text);
-          ItemModel(
+          final item = ItemModel(
             itemName: iteamNameController.text,
             itemDespriction: itemDescriptionController.text, 
             itemPrice: double.parse(priceController.text),
-            imageURL: _imageFile!.path.toString(),
+            imageURL: _imageFile != null ? _imageFile!.path.toString() : '',
             category: categoryController.text,
           );
+          
+          //Logger().i(item.itemName);
+          //resOwnerRepository.createItem(item);
+          createItem(item);
         },
         child: const Text("Submit"));
   }
@@ -214,4 +227,14 @@ class _AddNewItemState extends State<AddNewItem> {
   //     content: Text("Item added"),
   //   )));
   // }
+  void createItem(ItemModel itemModel)async{
+    User? user = FirebaseAuth.instance.currentUser;
+    if(user==null){
+      return;
+    }
+    String resName = await FirebaseFirestore.instance.collection("Authenticated_User_Info").doc(user.uid).get().then((value)=>value.data()!['name']);
+    await _database.collection("$resName Menu").doc(itemModel.itemName).set(itemModel.toJson()).whenComplete((){
+      Logger().i("Items added");
+    });
+  }
 }

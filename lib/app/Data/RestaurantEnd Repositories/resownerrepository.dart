@@ -11,7 +11,7 @@ class ResOwnerRepository extends GetxController{
 
   final _database = FirebaseFirestore.instance;
   
-  createItem(ItemModel itemModel)async{
+  void createItem(ItemModel itemModel)async{
     User? user = FirebaseAuth.instance.currentUser;
     if(user==null){
       return;
