@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/addnewitem.dart';
 
 import '../../core/app_colors.dart';
 
@@ -101,7 +103,9 @@ class _ItemsTabState extends State<ItemsTab> {
           height: 45,
           width: 385,
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(()=>const AddNewItem());
+            },
             backgroundColor: AppColors.mainColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(40),
