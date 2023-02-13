@@ -5,7 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'dart:io';
-import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/Data/RestaurantEnd%20Repositories/resownerrepository.dart';
@@ -26,6 +25,7 @@ class _AddNewItemState extends State<AddNewItem> {
   TextEditingController itemDescriptionController = TextEditingController();
   String imageurl = '';
   XFile? _imageFile;
+  XFile? file;
   final resOwnerRepository = Get.put(ResOwnerRepository());
   final _database = FirebaseFirestore.instance;
   @override
@@ -135,7 +135,7 @@ class _AddNewItemState extends State<AddNewItem> {
     return IconButton(
         onPressed: () async {
           ImagePicker imagePicker = ImagePicker();
-          XFile? file =
+          file =
               await ImagePicker().pickImage(source: ImageSource.gallery);
           if (file == null) {
             return;
@@ -148,10 +148,11 @@ class _AddNewItemState extends State<AddNewItem> {
           });
           Reference referenceroot = FirebaseStorage.instance.ref();
           Reference referencefirst = referenceroot.child('images');
-          Reference referenceimageupload = referencefirst.child(file.path);
+          Reference referenceimageupload = referencefirst.child(file!.path);
           try {
-            await referenceimageupload.putFile(File(file.path));
+            await referenceimageupload.putFile(File(file!.path));
             imageurl = await referenceimageupload.getDownloadURL();
+            Logger().i(" The image URL is - $imageurl");
           } catch (e) {
             Logger().i(e);
           }
@@ -199,7 +200,8 @@ class _AddNewItemState extends State<AddNewItem> {
             itemName: iteamNameController.text,
             itemDespriction: itemDescriptionController.text, 
             itemPrice: double.parse(priceController.text),
-            imageURL: _imageFile != null ? _imageFile!.path.toString() : '',
+            //imageURL: _imageFile != null ? _imageFile!.path.toString() : '',
+            imageURL: imageurl,
             category: categoryController.text,
           );
           
