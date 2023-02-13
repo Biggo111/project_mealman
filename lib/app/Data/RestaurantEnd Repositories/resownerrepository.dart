@@ -21,4 +21,13 @@ class ResOwnerRepository extends GetxController{
       Logger().i("Items added");
     });
   }
+
+  // Future<String>fetchResName()async{
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if(user==null){
+  //     return "You are not logged in";
+  //   }
+  //   String resName = await FirebaseFirestore.instance.collection("Authenticated_User_Info").doc(user.uid).get().then((value)=>value.data()!['name']);
+  //   return resName;
+  // }
 }
