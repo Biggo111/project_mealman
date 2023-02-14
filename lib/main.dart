@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
     //Stream documentStream = FirebaseFirestore.instance.collection('Authenticated_User_Info').doc(UserCredential.user.uid).snapshots();
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RestaurentHomeScreen(),
-      //home: SignupPage(),
+      //home: RestaurentHomeScreen(),
+      home: SignupPage(),
       //home: GlobalHomeScreen(),
       //home: AddNewItem(),
     );

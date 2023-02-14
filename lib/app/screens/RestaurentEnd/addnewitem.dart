@@ -134,7 +134,7 @@ class _AddNewItemState extends State<AddNewItem> {
   Widget _getImagePicker() {
     return IconButton(
         onPressed: () async {
-          ImagePicker imagePicker = ImagePicker();
+          //ImagePicker imagePicker = ImagePicker();
           file =
               await ImagePicker().pickImage(source: ImageSource.gallery);
           if (file == null) {
@@ -234,6 +234,10 @@ class _AddNewItemState extends State<AddNewItem> {
     if(user==null){
       return;
     }
+    if(imageurl.isEmpty){
+      return;
+    }
+    await Future.delayed(const Duration(seconds: 5));
     String resName = await FirebaseFirestore.instance.collection("Authenticated_User_Info").doc(user.uid).get().then((value)=>value.data()!['name']);
     await _database.collection("$resName Menu").doc(itemModel.itemName).set(itemModel.toJson()).whenComplete((){
       Logger().i("Items added");

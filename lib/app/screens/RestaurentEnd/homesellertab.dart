@@ -18,22 +18,42 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
   final _firestore = FirebaseFirestore.instance;
   String _resName = "";
 
-  void fetchResName() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      _resName = "You are not logged in";
-    } else {
-      _resName = await FirebaseFirestore.instance
-          .collection("Authenticated_User_Info")
-          .doc(user.uid)
-          .get()
-          .then((value) {
-          value.data()!['name'];
-          Logger().i(value.toString());
-          return value.toString();
-          });
+  Future<QuerySnapshot?>fetchResName() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      //Logger().i("Inside the try ${user!.uid}");
+      if (user == null) {
+        _resName = "You are not logged in";
+      } else {
+        DocumentSnapshot snapshot = await FirebaseFirestore.instance
+            .collection("Authenticated_User_Info")
+            .doc(user.uid)
+            .get();
+        if (snapshot.exists) {
+           Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+          // Logger().i(snapshot.data());
+          
+          _resName = data['name'];
+        } else {
+          _resName = "No data found for the user";
+        }
+        return _firestore.collection("$_resName Menu").get(); 
+        // _resName = (snapshot.data() as Map<String, dynamic>)['name'];
+        //Logger().i(snapshot.toString());
+        // await FirebaseFirestore.instance
+        //     .collection("Authenticated_User_Info")
+        //     .doc(user.uid)
+        //     .get()
+        //     .then((value) {
+        //     _resName = value.data()!['name'];
+        //     Logger().i(value.toString());
+        //     return value.toString();
+        //     });
+      }
+    } catch (e) {
+      Logger().i(_resName);
     }
-    Logger().i(_resName);
+    return null;
   }
   // void getResName() async {
   //   final resOwnerRepository = Get.put(ResOwnerRepository());
@@ -44,11 +64,14 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _firestore.collection("$_resName Menu").get(),
+        future: fetchResName(),
         builder: (context, snapshot) {
           // if (snapshot.connectionState == ConnectionState.done) {
           //   return const Center(child: Text("check your internet connection"));
           // }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
           if (!snapshot.hasData) {
             return const Center(child: Text("Your menu is empty"));
           }
@@ -143,13 +166,13 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
                                   ),
                                 ),
                                 Text(
-                                    documents[index]["itemPrice"].toString(),
-                                    style: TextStyle(
-                                      fontFamily: 'Jua',
-                                      fontSize: Diamensions.fontSize16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  documents[index]["itemPrice"].toString(),
+                                  style: TextStyle(
+                                    fontFamily: 'Jua',
+                                    fontSize: Diamensions.fontSize16,
+                                    fontWeight: FontWeight.bold,
                                   ),
+                                ),
                               ],
                             ),
                           ],
