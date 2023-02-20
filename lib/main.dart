@@ -6,10 +6,12 @@ import 'package:logger/logger.dart';
 import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
 import 'package:project_mealman/app/core/services/firebase_service.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/addnewitem.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/itemstab.dart';
 import 'package:project_mealman/app/screens/Signup_Page/signup_page.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPart/restaurant_list.dart';
 import 'package:project_mealman/app/screens/global_home_screen.dart';
 
+import 'app/screens/RestaurentEnd/Controllers/resend_controller.dart';
 import 'app/screens/RestaurentEnd/restaurent_home_screen.dart';
 
 void main() async{
@@ -17,6 +19,7 @@ void main() async{
   await FirebaseService.enableFirebase();
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
+  //Get.put(ResEndController());
   runApp(MyApp(auth: auth, firestore: firestore,));
   //runApp(const MyApp());
 }
@@ -38,6 +41,7 @@ class MyApp extends StatelessWidget {
       //home: GlobalHomeScreen(),
       //home: AddNewItem(),
       //home: RestaurentList(),
+      //home: ItemsTab(),
     );
     // final authMethods = FirebaseAuthMethods(auth);
     // String? userID = authMethods.userID;
