@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 import 'package:project_mealman/app/Data/RestaurantEnd%20Repositories/resownerrepository.dart';
 import 'package:project_mealman/app/Utils/diamensions.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/Controllers/resend_controller.dart';
 
 class HomeSellerTab extends StatefulWidget {
   const HomeSellerTab({super.key});
@@ -20,6 +21,7 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
 
   Future<QuerySnapshot?>fetchResName() async {
     try {
+
       User? user = FirebaseAuth.instance.currentUser;
       //Logger().i("Inside the try ${user!.uid}");
       if (user == null) {
@@ -37,6 +39,18 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
         } else {
           _resName = "No data found for the user";
         }
+
+        ResEndController controller = Get.put(ResEndController());
+        controller.setResName(_resName);
+        final menuList = await _firestore.collection("$_resName Menu").get().then((value){
+          List<Map<String,dynamic>>items=[];
+          value.docs.forEach((element) { 
+            items.add(element.data());
+           });
+           return items;
+        });
+        //List<QueryDocumentSnapshot> menuList = (await _firestore.collection("$_resName Menu").get()).docs;
+        controller.setMenuList(menuList);
         return _firestore.collection("$_resName Menu").get(); 
         // _resName = (snapshot.data() as Map<String, dynamic>)['name'];
         //Logger().i(snapshot.toString());
@@ -70,7 +84,7 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
           //   return const Center(child: Text("check your internet connection"));
           // }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color: AppColors.mainColor,));
           }
           if (!snapshot.hasData) {
             return const Center(child: Text("Your menu is empty"));
