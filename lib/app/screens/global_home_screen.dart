@@ -22,12 +22,7 @@ class _GlobalHomeScreenState extends State<GlobalHomeScreen> {
         ),
         body: Column(
           children: [
-            SlideView(),
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //   childAspectRatio: 3/2,
-            //   children: List.generate(4, (index) => GridviewItem()),
-            // ),
+            const SlideView(),
             Expanded(
               //flex: 1,
               child: GridView.builder(
@@ -40,7 +35,7 @@ class _GlobalHomeScreenState extends State<GlobalHomeScreen> {
                   return Container(
                     //margin: EdgeInsets.only(top: 12, bottom: 10),
                     padding: const EdgeInsets.only(top: 18, bottom: 14),
-                    child: GridviewItem()
+                    child: GridviewItem(index: index),
                   );
                 },
               ),
