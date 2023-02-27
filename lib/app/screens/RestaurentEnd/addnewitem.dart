@@ -197,12 +197,12 @@ class _AddNewItemState extends State<AddNewItem> {
           // creatIteam(iteamControler.text, priceController.text,
           //     quantityController.text,itemDescriptionController.text);
           final item = ItemModel(
-            itemName: iteamNameController.text,
-            itemDespriction: itemDescriptionController.text, 
-            itemPrice: double.parse(priceController.text),
+            itemName: iteamNameController.text.trim(),
+            itemDespriction: itemDescriptionController.text.trim(), 
+            itemPrice: double.parse(priceController.text.trim()),
             //imageURL: _imageFile != null ? _imageFile!.path.toString() : '',
             imageURL: imageurl,
-            category: categoryController.text,
+            category: categoryController.text.trim(),
           );
           
           //Logger().i(item.itemName);
