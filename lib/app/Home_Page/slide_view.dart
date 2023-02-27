@@ -15,6 +15,14 @@ class SlideView extends StatefulWidget {
 }
 
 class _SlideViewState extends State<SlideView> {
+  List slidingImageList = [
+    {"id": 1, "image_path": 'assets/global_homepage_images/image 1.png'},
+    {"id": 2, "image_path": 'assets/global_homepage_images/image 2.png'},
+    {"id": 3, "image_path": 'assets/global_homepage_images/image 3.png'},
+    {"id": 4, "image_path": 'assets/global_homepage_images/image 4.png'},
+    {"id": 5, "image_path": 'assets/global_homepage_images/image 6.png'}
+  ];
+
   PageController pageController = PageController(viewportFraction: 0.85);
   var currentPageValue = 0.0;
   double scaleFactor = 0.8;
@@ -102,7 +110,11 @@ class _SlideViewState extends State<SlideView> {
             margin: const EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: Colors.amber,
+              //color: Colors.amber,
+              image: DecorationImage(
+                image: AssetImage(slidingImageList[index]["image_path"]),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Align(
