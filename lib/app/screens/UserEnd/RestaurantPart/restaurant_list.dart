@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:logger/logger.dart';
+import 'package:project_mealman/app/Home_Page/myappbar.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPart/getRunningRestaurantDataList.dart';
 
 import '../../../core/app_colors.dart';
+import '../Drawers/MyDrawer.dart';
 //import 'adminViewRestaurant.dart';
 
 class RestaurentList extends StatefulWidget {
@@ -52,43 +54,44 @@ class _RestaurentListState extends State<RestaurentList> {
 
   @override
   Widget build(BuildContext context) {
+    final restaurentScreenSize = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: HexColor("EDDFDF"),
-        drawer: Drawer(),
-        appBar: AppBar(
-          backgroundColor: HexColor("FE7C00"),
-          //foregroundColor: Colors.orange,
+        appBar: MyAppBar(screenSize: restaurentScreenSize,),
+        // appBar: AppBar(
+        //   backgroundColor: HexColor("FE7C00"),
+        //   //foregroundColor: Colors.orange,
 
-          title: Title(
-            child: Text("Restaurants"),
-            color: Colors.white,
-          ),
+        //   title: Title(
+        //     child: Text("Restaurants"),
+        //     color: Colors.white,
+        //   ),
 
-          actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
-          ],
+        //   // actions: [
+        //   //   IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
+        //   // ],
 
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(50),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search Restaurant",
-                  prefixIcon: Icon(Icons.search),
-                  contentPadding: EdgeInsets.symmetric(vertical: 0.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ),
+        //   bottom: PreferredSize(
+        //     preferredSize: Size.fromHeight(50),
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(10.0),
+        //       child: TextField(
+        //         decoration: InputDecoration(
+        //           hintText: "Search Restaurant",
+        //           prefixIcon: Icon(Icons.search),
+        //           contentPadding: EdgeInsets.symmetric(vertical: 0.0),
+        //           border: OutlineInputBorder(
+        //             borderRadius: BorderRadius.circular(30),
+        //             borderSide: BorderSide(color: Colors.white),
+        //           ),
+        //           filled: true,
+        //           fillColor: Colors.white,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -108,7 +111,7 @@ class _RestaurentListState extends State<RestaurentList> {
           padding: const EdgeInsets.all(10.0),
           child: InkWell(
             onTap: () {
-              print(currentIndex);
+              //print(currentIndex);
             },
             child: CarouselSlider(
               items: slidingImageList

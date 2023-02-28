@@ -20,7 +20,7 @@ class _BeverageTypeTabState extends State<BeverageTypeTab> {
 
     final QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await FirebaseFirestore.instance
-              .collection("${restaurantName}Menu") 
+              .collection("${restaurantName} Menu") 
               .where('category', isEqualTo: 'Beverage')
               .get();
       querySnapshot.docs.forEach((doc) {
