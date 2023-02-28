@@ -4,19 +4,19 @@ import 'package:project_mealman/app/core/app_colors.dart';
 import 'package:project_mealman/app/screens/UserEnd/Drawers/MyDrawer.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/Item_order_page/cart_page.dart';
 
-class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
+class MyAppBar2 extends StatefulWidget implements PreferredSizeWidget {
   double screenSize;
   var resName;
-  MyAppBar({super.key, required this.screenSize, this.resName});
+  MyAppBar2({super.key, required this.screenSize, this.resName});
 
   @override
-  State<MyAppBar> createState() => _MyAppBarState();
+  State<MyAppBar2> createState() => _MyAppBar2State();
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight * 1.9);
   //Size get preferredSize => const Size(widget.screenSize,kToolbarHeight*1.9);
 }
 
-class _MyAppBarState extends State<MyAppBar> {
+class _MyAppBar2State extends State<MyAppBar2> {
   //final size = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
   @override
   Widget build(BuildContext context) {
