@@ -17,11 +17,11 @@ class _FastFoodTypeTabState extends State<FastFoodTypeTab> {
   Future<List<Map<String, dynamic>>> fetchMenuForFastFoodType() async {
     List<Map<String, dynamic>> menuList = [];
     String restaurantName = widget.restaurantName;
-    Logger().i("$restaurantName Menu");
+    //Logger().i("$restaurantName Menu");
 
     final QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await FirebaseFirestore.instance
-              .collection("${restaurantName}Menu") 
+              .collection("${restaurantName} Menu") 
               .where('category', isEqualTo: 'Fast Food')
               .get();
       querySnapshot.docs.forEach((doc) {

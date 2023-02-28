@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:project_mealman/app/screens/UserEnd/Drawers/MyDrawer.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/beverage_type_tab.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/fastfood_type_tab.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/rice_type_tab.dart';
@@ -26,9 +27,10 @@ class _RestaurantPageScreenState extends State<RestaurantPageScreen>
     final restaurentScreenSize = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        drawer: const MyDrawer(),
         appBar: MyAppBar(
           screenSize: restaurentScreenSize,
-          resName: "",
+          resName: widget.resname,
         ),
         body: Column(
           children: [
