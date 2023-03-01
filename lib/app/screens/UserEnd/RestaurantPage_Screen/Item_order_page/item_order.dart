@@ -46,7 +46,8 @@ class _ItemOrderState extends State<ItemOrder> {
           //foregroundColor: Colors.white,
           leading: IconButton(
             onPressed: (){
-              Get.back();
+              //Get.back();
+              Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back),
             color: HexColor("FE7C00"),
@@ -258,6 +259,7 @@ class _ItemOrderState extends State<ItemOrder> {
                               imageURL: imageURL,
                               itemPrice: (int.parse(itemPrice)*quantity).toString(),
                               restaurantName: restaurantName,
+                              quantity: quantity,
                             ));
                           },
                           icon: Icon(

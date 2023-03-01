@@ -15,6 +15,34 @@ class SlideView extends StatefulWidget {
 }
 
 class _SlideViewState extends State<SlideView> {
+
+
+  String slider1ItemName="";
+  String slider1ItemPrice="";
+  String slider1RestaurantName="";
+  double slider1ItemRating=5.0;
+
+  String slider2ItemName="";
+  String slider2ItemPrice="";
+  String slider2RestaurantName="";
+  double slider2ItemRating=5.0;
+
+  String slider3ItemName="";
+  String slider3ItemPrice="";
+  String slider3RestaurantName="";
+  double slider3ItemRating=5.0;
+
+  String slider4ItemName="";
+  String slider4ItemPrice="";
+  String slider4RestaurantName="";
+  double slider4ItemRating=5.0;
+
+  Future<void>getSlider1value()async{
+    
+  }
+
+
+
   List slidingImageList = [
     {"id": 1, "image_path": 'assets/global_homepage_images/image 1.png'},
     {"id": 2, "image_path": 'assets/global_homepage_images/image 2.png'},
@@ -30,6 +58,7 @@ class _SlideViewState extends State<SlideView> {
   @override
   void initState() {
     super.initState();
+    getSlider1value();
     pageController.addListener(() {
       setState(() {
         currentPageValue = pageController.page!;
@@ -183,7 +212,7 @@ class _SlideViewState extends State<SlideView> {
                     const SizedBox(
                       height: 20,
                     ),
-                    BigText(text: "Sarah's Restaurent"),
+                    BigText(text: "Cafeteria"),
                   ],
                 ),
               ),

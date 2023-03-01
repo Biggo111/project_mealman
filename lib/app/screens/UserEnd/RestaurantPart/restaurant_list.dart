@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:project_mealman/app/Home_Page/myappbar.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPart/getRunningRestaurantDataList.dart';
 
+import '../../../Home_Page/myappbar3.dart';
 import '../../../core/app_colors.dart';
 import '../Drawers/MyDrawer.dart';
 //import 'adminViewRestaurant.dart';
@@ -57,8 +58,9 @@ class _RestaurentListState extends State<RestaurentList> {
     final restaurentScreenSize = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        drawer: const MyDrawer(),
         backgroundColor: HexColor("EDDFDF"),
-        appBar: MyAppBar(screenSize: restaurentScreenSize,),
+        appBar: MyAppBar3(screenSize: restaurentScreenSize,),
         // appBar: AppBar(
         //   backgroundColor: HexColor("FE7C00"),
         //   //foregroundColor: Colors.orange,

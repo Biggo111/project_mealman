@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:project_mealman/app/Home_Page/myappbar2.dart';
+import 'package:project_mealman/app/Home_Page/myappbar3.dart';
+import 'package:project_mealman/app/Home_Page/myappbar4.dart';
 import 'package:project_mealman/app/screens/UserEnd/Drawers/MyDrawer.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/beverage_type_tab.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/fastfood_type_tab.dart';
@@ -28,7 +31,7 @@ class _RestaurantPageScreenState extends State<RestaurantPageScreen>
     return SafeArea(
       child: Scaffold(
         drawer: const MyDrawer(),
-        appBar: MyAppBar(
+        appBar: MyAppBar3(
           screenSize: restaurentScreenSize,
           resName: widget.resname,
         ),
