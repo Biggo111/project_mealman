@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project_mealman/app/screens/Signup_Page/signup_page.dart';
+import 'package:project_mealman/app/screens/UserEnd/Drawers/Drawer_Elements/profile.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -38,7 +42,9 @@ class _MyDrawerState extends State<MyDrawer> {
             title: TextButton(
               
               
-              onPressed: () {},
+              onPressed: () {
+                Get.to(()=> const Profile());
+              },
               child: 
               
               Text(
@@ -147,7 +153,10 @@ class _MyDrawerState extends State<MyDrawer> {
               size: 40,
             ),
             title: TextButton(
-              onPressed: () {},
+              onPressed: () async{
+                await FirebaseAuth.instance.signOut();
+                Get.to(()=>const SignupPage());
+              },
               child: Text(
                 "Logout",
                 textAlign: TextAlign.end,
