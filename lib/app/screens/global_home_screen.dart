@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/Home_Page/gridview_item.dart';
 import 'package:project_mealman/app/Home_Page/myappbar.dart';
+import 'package:project_mealman/app/Home_Page/myappbar3.dart';
 import 'package:project_mealman/app/Home_Page/slide_view.dart';
 
 class GlobalHomeScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _GlobalHomeScreenState extends State<GlobalHomeScreen> {
     final screenSize = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        appBar: MyAppBar(
+        appBar: MyAppBar3(
           screenSize: screenSize,
         ),
         body: Column(

@@ -7,6 +7,8 @@ import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
 import 'package:project_mealman/app/core/services/firebase_service.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/addnewitem.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/itemstab.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/order_history.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/see_order_page.dart';
 import 'package:project_mealman/app/screens/Signup_Page/signup_page.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/Item_order_page/item_order.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/restaurant_page_screen.dart';
@@ -15,6 +17,7 @@ import 'package:project_mealman/app/screens/global_home_screen.dart';
 
 import 'app/screens/RestaurentEnd/Controllers/resend_controller.dart';
 import 'app/screens/RestaurentEnd/restaurent_home_screen.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,54 +39,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //CollectionReference which_user = FirebaseFirestore.instance.collection('Authenticated_User_Info');
     //Stream documentStream = FirebaseFirestore.instance.collection('Authenticated_User_Info').doc(UserCredential.user.uid).snapshots();
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      //home: RestaurentHomeScreen(),
-      //home: SignupPage(),
+      //home: RestaurentHomeScreen(),     
+      home: SignupPage(),
       //home: GlobalHomeScreen(),
       //home: AddNewItem(),
-      home: RestaurentList(),
+      //home: RestaurentList(),
       //home: ItemsTab(),
       //home: RestaurantPageScreen(),
       //home: ItemOrder(),
+      //home: SeeOrderPage(),
+      //home: OrderHistory(),
     );
-    // final authMethods = FirebaseAuthMethods(auth);
-    // String? userID = authMethods.userID;
-    // return StreamBuilder(
-    //   stream: FirebaseFirestore.instance
-    //       .collection('Authenticated_User_Info')
-    //       .doc(userID)
-    //       .snapshots(),
-    //   builder: ((context, snapshot){
-    //     if(snapshot.hasData && snapshot.data != null){
-    //       //Logger().i(userID);
-    //       var userType = snapshot.data?['userType'];
-    //       if(userType=='student' || userType=='teacher'){
-    //         return const GetMaterialApp(
-    //           debugShowCheckedModeBanner: false,
-    //           home: GlobalHomeScreen(),
-    //         );
-    //       }
-    //       else if (userType == 'restaurant') {
-    //         return const GetMaterialApp(
-    //           debugShowCheckedModeBanner: false,
-    //           home: RestaurentHomeScreen(),
-    //         );
-    //       }
-    //       else {
-    //         return const GetMaterialApp(
-    //           debugShowCheckedModeBanner: false,
-    //           home: SignupPage(),
-    //         );
-    //       }
-    //     }
-    //     else {
-    //       return const GetMaterialApp(
-    //         debugShowCheckedModeBanner: false,
-    //         home: SignupPage(),
-    //       );
-    //     }
-    //   }),
-    // );
   }
 }

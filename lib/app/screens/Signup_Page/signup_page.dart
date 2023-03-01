@@ -21,7 +21,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
-                      "assets/signuppage_images/signupPageBackground.png"),
+                      "assets/signuppage_images/signupPageBackground2.png"),
                   fit: BoxFit.cover),
             ),
             child: Padding(

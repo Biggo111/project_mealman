@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
 import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
+import 'package:project_mealman/app/screens/Signup_Page/login_tab.dart';
 
 class SignupTab extends StatefulWidget {
   const SignupTab({super.key});
@@ -119,7 +121,10 @@ class _SignupTabState extends State<SignupTab> {
           height: 45,
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: ()=>signupUser(),
+            onPressed: (){
+              signupUser();
+              Get.to(()=>const LoginTab());
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.mainColor,
               shape: RoundedRectangleBorder(
