@@ -39,24 +39,47 @@ class _MyAppBarState extends State<MyAppBar> {
                   Scaffold.of(context).openDrawer();
                 },
               ),
-               Text(
-                widget.resName?? "MealMan",
+              Text(
+                widget.resName ?? "MealMan",
                 style: TextStyle(
                   fontFamily: "Jua",
                   color: Colors.white,
                   fontSize: 30,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: widget.screenSize / 2.5),
-                child: IconButton(
-                  icon: const Icon(Icons.shopping_cart),
-                  color: Colors.white,
-                  onPressed: () {
-                    //Get.to(()=>CartPage.empty());
-                  },
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(left: widget.screenSize / 2.5),
+              //   // child: IconButton(
+              //   //   icon: const Icon(Icons.shopping_cart),
+              //   //   color: Colors.white,
+              //   //   onPressed: () {
+              //   //     //Get.to(()=>CartPage.empty());
+              //   //   },
+              //   // ),
+              // ),
+              // SizedBox(width: 60,),
+              // SizedBox(
+              //   height: 45,
+              //   width: 150,
+              //   child: FloatingActionButton(
+              //     onPressed: () {
+              //       //Get.to(() => );
+              //     },
+              //     elevation: 0,
+              //     backgroundColor: Colors.white,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(40),
+              //     ),
+              //     child: const Text(
+              //       "MealCoin: ",
+              //       style: TextStyle(
+              //         color: AppColors.mainColor,
+              //         fontFamily: 'Ubuntu',
+              //         fontSize: 18,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           Container(
@@ -66,25 +89,25 @@ class _MyAppBarState extends State<MyAppBar> {
               borderRadius: BorderRadius.circular(40),
               color: Colors.white,
             ),
-            child: TextField(
-              decoration: const InputDecoration(
-                //focusedBorder: InputBorder.none,
-                border: InputBorder.none,
-                focusColor: Colors.transparent,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: AppColors.mainColor,
-                ),
-                hintText: "Search",
-                hintStyle: TextStyle(
-                  color: Colors.black38,
-                  fontFamily: 'Ubuntu',
-                  fontSize: 20,
-                ),
-              ),
-              //controller: loginEmailController,
-              onChanged: (String value) {},
-            ),
+            // child: TextField(
+            //   decoration: const InputDecoration(
+            //     //focusedBorder: InputBorder.none,
+            //     border: InputBorder.none,
+            //     focusColor: Colors.transparent,
+            //     prefixIcon: Icon(
+            //       Icons.search,
+            //       color: AppColors.mainColor,
+            //     ),
+            //     hintText: "Search",
+            //     hintStyle: TextStyle(
+            //       color: Colors.black38,
+            //       fontFamily: 'Ubuntu',
+            //       fontSize: 20,
+            //     ),
+            //   ),
+            //   //controller: loginEmailController,
+            //   onChanged: (String value) {},
+            // ),
           ),
         ],
       ),

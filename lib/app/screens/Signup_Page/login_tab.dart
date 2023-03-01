@@ -111,7 +111,7 @@ class _LoginTabState extends State<LoginTab> {
                     Get.to(()=>const GlobalHomeScreen());
                   }
                   else {
-                    Get.to(()=>const RestaurentHomeScreen());
+                    Get.to(()=>RestaurentHomeScreen());
                   }
                 }
               },

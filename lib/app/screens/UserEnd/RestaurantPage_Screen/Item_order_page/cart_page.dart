@@ -7,7 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/restaurant_page_screen.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPart/restaurant_list.dart';
-
+import 'package:intl/intl.dart';
 import '../../../../Modules/UserEndModels/order_model.dart';
 //import 'package:image_uploader/widgets/drawer.dart';
 
@@ -16,12 +16,14 @@ class CartPage extends StatefulWidget {
   String imageURL;
   String itemPrice;
   String restaurantName;
+  int quantity;
   CartPage({
     super.key,
     required this.itemName,
     required this.imageURL,
     required this.itemPrice,
     required this.restaurantName,
+    required this.quantity,
   });
 
   @override
@@ -47,7 +49,8 @@ class _CartPageState extends State<CartPage> {
     totalItems.add({
       'itemName': widget.itemName,
       'itemPrice': widget.itemPrice,
-      'imageURL': widget.imageURL
+      'imageURL': widget.imageURL,
+      'quantity': widget.quantity,
     });
     for (var i = 0; i < totalItems.length; i++) {
       totalPrice += int.parse(totalItems[i]['itemPrice']);
@@ -58,7 +61,9 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.off(RestaurantPageScreen(resname: widget.restaurantName,));
+        Get.off(RestaurantPageScreen(
+          resname: widget.restaurantName,
+        ));
         return false;
       },
       child: SafeArea(
@@ -91,8 +96,8 @@ class _CartPageState extends State<CartPage> {
                     children: [
                       Text(
                         "My Orders",
-                        style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
                       ),
                       SizedBox(
                         height: 10,
@@ -244,11 +249,10 @@ class _CartPageState extends State<CartPage> {
                 labelText: "Enter location",
                 labelStyle: TextStyle(color: AppColors.mainColor),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.mainColor), 
+                  borderSide: BorderSide(color: AppColors.mainColor),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.mainColor)
-                ),
+                    borderSide: BorderSide(color: AppColors.mainColor)),
               ),
             ),
             Padding(
@@ -315,7 +319,7 @@ class _CartPageState extends State<CartPage> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0))),
                         onPressed: () async {
-                          if(locationController.text.trim().isEmpty){
+                          if (locationController.text.trim().isEmpty) {
                             return showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -359,14 +363,27 @@ class _CartPageState extends State<CartPage> {
                               .doc(user.uid)
                               .get()
                               .then((value) => value.data()!['email']);
+                          String userName = await FirebaseFirestore.instance
+                              .collection("Authenticated_User_Info")
+                              .doc(user.uid)
+                              .get()
+                              .then((value) => value.data()!['name']);
+                          String timeNow =
+                              DateFormat('h:mm a').format(DateTime.now());
+                          String date =
+                              DateFormat('dd:MM:yyyy').format(DateTime.now());
+
                           final order = OrderModel(
+                            userName: userName,
                             userPhone: userPhoneNo,
                             userMail: userEmail,
-                            itemName: widget.itemName,
+                            allItems: totalItems,
                             totalPrice: totalPrice,
-                            imageURL: widget.imageURL,
+                            //imageURL: widget.imageURL,
                             location: locationController.text.trim(),
                             paymentMethod: dropdownvalue,
+                            timeNow: timeNow,
+                            date: date
                           );
                           await FirebaseFirestore.instance
                               .collection("${widget.restaurantName} Orders")
