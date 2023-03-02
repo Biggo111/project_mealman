@@ -243,7 +243,7 @@ class _CartPageState extends State<CartPage> {
             TextFormField(
               cursorColor: AppColors.mainColor,
               keyboardType: TextInputType.multiline,
-              maxLines: null,
+              maxLines: 1,
               controller: locationController,
               decoration: const InputDecoration(
                 labelText: "Enter location",

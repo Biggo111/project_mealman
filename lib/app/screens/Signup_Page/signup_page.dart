@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
 import 'package:project_mealman/app/screens/Signup_Page/login_tab.dart';
 import 'package:project_mealman/app/screens/Signup_Page/signup_tab.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
 
@@ -25,43 +25,43 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                   fit: BoxFit.cover),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 42,
-                vertical: 155,
+              padding: EdgeInsets.symmetric(
+                horizontal: 42.w,
+                vertical: 155.h,
               ),
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40), color: Colors.white),
+                    borderRadius: BorderRadius.circular(40.r), color: Colors.white),
                 child: Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.all(20.sp),
                   child: Column(
                     children: [
                       Card(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40)),
+                            borderRadius: BorderRadius.circular(40.r)),
                         elevation: 5,
                         child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
+                              borderRadius: BorderRadius.circular(40.r),
                               //border: Border.all(),
                               color: Colors.white,
                             ),
                             child: TabBar(
                               indicator: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
+                                borderRadius: BorderRadius.circular(40.r),
                                 color: AppColors.mainColor,
                               ),
                               controller: tabController,
                               isScrollable: true,
                               labelPadding:
-                                  const EdgeInsets.symmetric(horizontal: 35),
+                                  EdgeInsets.symmetric(horizontal: 35.w),
                               unselectedLabelColor: AppColors.mainColor,
-                              tabs: const [
+                              tabs: [
                                 Tab(
                                   child: Text(
                                     'Login',
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 20.sp,
                                       fontFamily: 'Jua',
                                     ),
                                   ),
@@ -70,7 +70,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                   child: Text(
                                     'Signup',
                                     style: TextStyle(
-                                        fontSize: 20, fontFamily: 'Jua'),
+                                        fontSize: 20.sp, fontFamily: 'Jua'),
                                   ),
                                 ),
                               ],
