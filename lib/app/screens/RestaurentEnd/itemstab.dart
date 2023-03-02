@@ -8,18 +8,19 @@ import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/Controllers/resend_controller.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/addnewitem.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/addnewitem2.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/homesellertab.dart';
-
+ 
 import '../../Modules/RestaurentendModels/item_Model.dart';
 import '../../core/app_colors.dart';
-
+ 
 class ItemsTab extends StatefulWidget {
   const ItemsTab({super.key});
-
+ 
   @override
   State<ItemsTab> createState() => _ItemsTabState();
 }
-
+ 
 class _ItemsTabState extends State<ItemsTab> {
   ResEndController controller = Get.find();
   List<GlobalKey> textKeys = [];
@@ -28,18 +29,18 @@ class _ItemsTabState extends State<ItemsTab> {
   TextEditingController updateDescriptionController = TextEditingController();
   TextEditingController updatePriceController = TextEditingController();
   TextEditingController updateCategoryController = TextEditingController();
-
+ 
   String imageurlForUpdate = '';
   XFile? _imageFileForUpdate;
   XFile? fileForUpdate;
-
+ 
   @override
   void initState() {
     super.initState();
     // Create a new GlobalKey for each item in the list
     textKeys = List.generate(controller.menuList!.length, (_) => GlobalKey());
   }
-
+ 
   updateIndex(index){
     void updateDatabase(int index) async{
       await FirebaseFirestore.instance.collection("${controller.resName} Menu").doc("${controller.menuList![index]["itemName"]}").update({
@@ -59,7 +60,7 @@ class _ItemsTabState extends State<ItemsTab> {
         controller.menuList![index]["itemCategory"] = updateCategoryController.text;
     });
   }
-
+ 
   // updateIndex(index){
   //   setState(() {
   //     void updateDatabase(int index) async{
@@ -74,7 +75,7 @@ class _ItemsTabState extends State<ItemsTab> {
   //     updateDatabase(index);
   //   });
   // }
-
+ 
   removeIndex(index) {
     void deleteFromDatabase(int index2) async {
       await FirebaseFirestore.instance
@@ -84,13 +85,13 @@ class _ItemsTabState extends State<ItemsTab> {
           .then((value) => Logger().i("Item Deleted"))
           .catchError((error) => Logger().i("Error deleting item: $error"));
     }
-
+ 
     deleteFromDatabase(index);
     setState(() {
       controller.menuList!.removeAt(index);
     });
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -283,7 +284,7 @@ class _ItemsTabState extends State<ItemsTab> {
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     margin: const EdgeInsets.all(10),
-                    height: 170,
+                    height: 140,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
@@ -302,12 +303,32 @@ class _ItemsTabState extends State<ItemsTab> {
                         ]),
                     child: Row(
                       children: [
-                        Image.network(
-                          "${document['imageURL']}",
-                          width: 60,
-                          height: 150,
-                          fit: BoxFit.cover,
+ 
+                        Container(
+                          height: 100,
+                          width: 100,
+ 
+                          decoration: BoxDecoration(
+                               color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(image: NetworkImage("${document['imageURL']}"),
+                             fit: BoxFit.cover,
+ 
+ 
+                            ),
+ 
+ 
+                          ),
                         ),
+                        // Container(
+                        //   height: 100,
+                        //   width: 100,
+                        //   child: Image.network(
+                        //     "${document['imageURL']}",
+ 
+                        //     fit: BoxFit.cover,
+                        //   ),
+                        // ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -324,7 +345,7 @@ class _ItemsTabState extends State<ItemsTab> {
                                     key: textKeys[index],
                                     style: const TextStyle(
                                       fontFamily: 'Ubuntu',
-                                      fontSize: 25,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: AppColors.mainColor,
                                     ),
@@ -332,14 +353,7 @@ class _ItemsTabState extends State<ItemsTab> {
                                   // const SizedBox(
                                   //   width: 10,
                                   // ),
-                                  Text(
-                                    "${document['itemPrice']}",
-                                    style: const TextStyle(
-                                      fontFamily: 'Jua',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+ 
                                 ],
                               ),
                             ),
@@ -348,14 +362,42 @@ class _ItemsTabState extends State<ItemsTab> {
                                 top: 10,
                               ),
                               margin: const EdgeInsets.only(left: 20),
-                              height: 95,
-                              width: 250,
+                              height: 50,
+                              width: 200,
                               child: SingleChildScrollView(
                                 child: Text(
                                   "${document['itemDescription']}",
                                 ),
                               ),
                             ),
+                             Padding(
+                               padding: const EdgeInsets.only(left: 20),
+                               child: Row(
+                                 children: [
+                                   Text(
+                                          "${document['itemPrice']}",
+                                          style: const TextStyle(
+                                            fontFamily: 'Jua',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+ 
+                                    Text(
+                                          "TK",
+                                          style: const TextStyle(
+                                            fontFamily: 'Jua',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+ 
+ 
+ 
+ 
+                                 ],
+                               ),
+                             ),
                           ],
                         ),
                       ],
@@ -369,7 +411,7 @@ class _ItemsTabState extends State<ItemsTab> {
           width: 385,
           child: FloatingActionButton(
             onPressed: () {
-              Get.to(() => const AddNewItem());
+              Get.to(() => const AddNewItem2());
             },
             backgroundColor: AppColors.mainColor,
             shape: RoundedRectangleBorder(
@@ -386,3 +428,4 @@ class _ItemsTabState extends State<ItemsTab> {
         ));
   }
 }
+ 
