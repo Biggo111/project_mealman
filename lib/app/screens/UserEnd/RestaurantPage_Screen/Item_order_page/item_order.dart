@@ -5,7 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/Item_order_page/cart_page.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
+ 
 class ItemOrder extends StatefulWidget {
   String itemName;
   String itemDescription;
@@ -19,11 +19,11 @@ class ItemOrder extends StatefulWidget {
       required this.itemPrice,
       required this.imageURL,
       required this.restaurantName});
-
+ 
   @override
   State<ItemOrder> createState() => _ItemOrderState();
 }
-
+ 
 class _ItemOrderState extends State<ItemOrder> {
   double rating = 0;
   int quantity = 1;
@@ -41,6 +41,7 @@ class _ItemOrderState extends State<ItemOrder> {
     restaurantName = widget.restaurantName;
     return SafeArea(
       child: Scaffold(
+        //backgroundColor: Colors.amber,
         appBar: AppBar(
           backgroundColor: Colors.white,
           //foregroundColor: Colors.white,
@@ -52,7 +53,7 @@ class _ItemOrderState extends State<ItemOrder> {
             icon: const Icon(Icons.arrow_back),
             color: HexColor("FE7C00"),
           ),
-
+ 
           title: Title(
             child: Text(
               restaurantName,
@@ -60,7 +61,7 @@ class _ItemOrderState extends State<ItemOrder> {
             ),
             color: HexColor("FE7C00"),
           ),
-
+ 
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
           ],
@@ -68,7 +69,9 @@ class _ItemOrderState extends State<ItemOrder> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 20,),
               _getItemImageBig(),
+              SizedBox(height: 20,),
               _getItemOrderInfo(),
             ],
           ),
@@ -76,22 +79,24 @@ class _ItemOrderState extends State<ItemOrder> {
       ),
     );
   }
-
+ 
   Widget _getItemImageBig() {
     return Container(
       height: 250,
-      width: double.infinity,
+ 
+      width:350,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
           color: Colors.white,
           image: DecorationImage(
               image: NetworkImage(imageURL), //fetch image from database here
-              fit: BoxFit.scaleDown)),
+              fit: BoxFit.cover)),
     );
   }
-
+ 
   Widget _getItemOrderInfo() {
     return Container(
-      height: 430,
+      height: 475,
       width: double.infinity,
       color: HexColor("FE7C00"),
       child: Padding(
@@ -107,7 +112,7 @@ class _ItemOrderState extends State<ItemOrder> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ), // Fetch item name here from database
-
+ 
             _getRatingView(),
             _getDescription(),
             _getAddsOn(),
@@ -119,7 +124,7 @@ class _ItemOrderState extends State<ItemOrder> {
       ),
     );
   }
-
+ 
   Widget _getQuantity() {
     return Row(
       children: [
@@ -189,14 +194,14 @@ class _ItemOrderState extends State<ItemOrder> {
       ],
     );
   }
-
+ 
   Widget _getDescription() {
     return Text(
       itemDescription,
       style: TextStyle(color: Colors.white, fontSize: 15),
     );
   }
-
+ 
   Widget _getAddsOn() {
     return Row(
       children: [
@@ -217,7 +222,7 @@ class _ItemOrderState extends State<ItemOrder> {
       ],
     );
   }
-
+ 
   Widget _getTotalPrice() {
     return Container(
       child: Column(
@@ -237,44 +242,55 @@ class _ItemOrderState extends State<ItemOrder> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
-              Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                              color: HexColor("FE7C00"), fontSize: 20),
-                        ),
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            Get.to(()=>CartPage(
+              GestureDetector(
+                onTap: (){
+                  Get.to(()=>CartPage(
                               itemName: itemName,
                               imageURL: imageURL,
                               itemPrice: (int.parse(itemPrice)*quantity).toString(),
                               restaurantName: restaurantName,
                               quantity: quantity,
                             ));
-                          },
-                          icon: Icon(
-                            Icons.shopping_cart,
-                            color: HexColor("FE7C00"),
-                          )),
-                    ],
-                  ))
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Add to Cart",
+                            style: TextStyle(
+                                color: HexColor("FE7C00"), fontSize: 20),
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              // Get.to(()=>CartPage(
+                              //   itemName: itemName,
+                              //   imageURL: imageURL,
+                              //   itemPrice: (int.parse(itemPrice)*quantity).toString(),
+                              //   restaurantName: restaurantName,
+                              //   quantity: quantity,
+                              // ));
+                            },
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: HexColor("FE7C00"),
+                            )),
+                      ],
+                    )),
+              )
             ],
           )
         ],
       ),
     );
   }
-
+ 
   Widget _getBuildRating() {
     return RatingBar.builder(
         minRating: 1,
@@ -290,7 +306,7 @@ class _ItemOrderState extends State<ItemOrder> {
           });
         });
   }
-
+ 
   Widget _getRatingButton() {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -317,7 +333,7 @@ class _ItemOrderState extends State<ItemOrder> {
           style: TextStyle(color: HexColor("FE7C00")),
         ));
   }
-
+ 
   Widget _getRatingView() {
     return RatingBar.builder(
       initialRating:

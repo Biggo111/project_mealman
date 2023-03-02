@@ -61,7 +61,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.off(RestaurantPageScreen(
+        Get.to(RestaurantPageScreen(
           resname: widget.restaurantName,
         ));
         return false;
@@ -197,6 +197,7 @@ class _CartPageState extends State<CartPage> {
                                                 BorderRadius.circular(15.0))),
                                     onPressed: () {
                                       setState(() {
+                                        totalPrice-=int.parse(totalItems[index]['itemPrice']);
                                         totalItems.removeAt(index);
                                       });
                                     },

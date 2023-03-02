@@ -8,6 +8,7 @@ import 'package:project_mealman/Splash%20Screens/permanent_splash.dart';
 import 'package:project_mealman/app/core/services/firebase_auth_methods.dart';
 import 'package:project_mealman/app/core/services/firebase_service.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/addnewitem.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/addnewitem2.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/itemstab.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/order_history.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/see_order_page.dart';
@@ -44,17 +45,17 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (BuildContext context, Widget? widget) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        //home: RestaurentHomeScreen(),     
+        home: RestaurentHomeScreen(),     
         //home: SignupPage(),
         //home: GlobalHomeScreen(),
-        //home: AddNewItem(),
+        //home: AddNewItem2(),
         //home: RestaurentList(),
         //home: ItemsTab(),
         //home: RestaurantPageScreen(),
         //home: ItemOrder(),
         //home: SeeOrderPage(),
         //home: OrderHistory(),
-        home: PermanentSplash()
+        //home: PermanentSplash()
       ),
       designSize: const Size(412, 820),
     );
