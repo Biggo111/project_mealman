@@ -6,20 +6,31 @@ import 'package:project_mealman/app/screens/RestaurentEnd/credit_approval.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/order_history2.dart';
 import 'package:project_mealman/app/screens/UserEnd/Drawers/MyDrawer.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/Item_order_page/cart_page.dart';
-
+ 
 class MyAppBar4 extends StatefulWidget implements PreferredSizeWidget {
   double screenSize;
   var resName;
   MyAppBar4({super.key, required this.screenSize, this.resName});
-
+ 
   @override
   State<MyAppBar4> createState() => _MyAppBar4State();
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight * 1.9);
   //Size get preferredSize => const Size(widget.screenSize,kToolbarHeight*1.9);
 }
-
+ 
 class _MyAppBar4State extends State<MyAppBar4> {
+  void handleClick(String value) {//method for handling 3 dot button
+    switch (value) {
+      case 'MealCoin Req':
+        break;
+      case 'Order History':
+        break;
+      case 'Manage Event':
+        break;
+    }
+  }
+ 
   //final size = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
   @override
   Widget build(BuildContext context) {
@@ -52,6 +63,34 @@ class _MyAppBar4State extends State<MyAppBar4> {
                   fontSize: 30,
                 ),
               ),
+ 
+              SizedBox(
+                width: 30,
+              ),
+ 
+              Container(//Here is the 3 dot button for appbar
+                //color: Colors.red,
+                width: 200,
+                height: 30,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    PopupMenuButton<String>(
+                      color: Colors.white,
+ 
+                      onSelected: handleClick,
+                      itemBuilder: (BuildContext context) {
+                        return {'MealCoin Req', 'Order history','Manage Event'}.map((String choice) {
+                          return PopupMenuItem<String>(
+                            value: choice,
+                            child: Text(choice),
+                          );
+                        }).toList();
+                      },
+                    ),
+                  ],
+                ),
+              )
               // Padding(
               //   padding: EdgeInsets.only(left: widget.screenSize / 2.5),
               //   // child: IconButton(
@@ -65,7 +104,7 @@ class _MyAppBar4State extends State<MyAppBar4> {
               //SizedBox(width: 20,),
             ],
           ),
-          
+ 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

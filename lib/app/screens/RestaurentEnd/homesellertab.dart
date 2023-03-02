@@ -52,17 +52,6 @@ class _HomeSellerTabState extends State<HomeSellerTab> {
         //List<QueryDocumentSnapshot> menuList = (await _firestore.collection("$_resName Menu").get()).docs;
         controller.setMenuList(menuList);
         return _firestore.collection("$_resName Menu").get(); 
-        // _resName = (snapshot.data() as Map<String, dynamic>)['name'];
-        //Logger().i(snapshot.toString());
-        // await FirebaseFirestore.instance
-        //     .collection("Authenticated_User_Info")
-        //     .doc(user.uid)
-        //     .get()
-        //     .then((value) {
-        //     _resName = value.data()!['name'];
-        //     Logger().i(value.toString());
-        //     return value.toString();
-        //     });
       }
     } catch (e) {
       Logger().i(_resName);
