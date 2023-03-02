@@ -14,7 +14,7 @@ import '../../Home_Page/myappbar.dart';
 import '../../Home_Page/myappbar4.dart';
 import '../../Utils/diamensions.dart';
 import '../../core/app_colors.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class RestaurentHomeScreen extends StatefulWidget {
   const RestaurentHomeScreen({super.key,});
 
@@ -26,27 +26,6 @@ class _RestaurentHomeScreenState extends State<RestaurentHomeScreen>
     with TickerProviderStateMixin {
   
   String resName = "MealMan";
-
-  // void getResName()async{
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //     //Logger().i("Inside the try ${user!.uid}");
-  //     if (user == null) {
-  //       resName = "You are not logged in";
-  //     } else {
-  //       DocumentSnapshot snapshot = await FirebaseFirestore.instance
-  //           .collection("Authenticated_User_Info")
-  //           .doc(user.uid)
-  //           .get();
-  //       if (snapshot.exists) {
-  //          Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-  //         // Logger().i(snapshot.data());
-          
-  //         resName = data['name'];
-  //       } else {
-  //         resName = "No data found for the user";
-  //       }
-  //     }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +59,12 @@ class _RestaurentHomeScreenState extends State<RestaurentHomeScreen>
                   //isScrollable: true,
                   //labelPadding: const EdgeInsets.symmetric(horizontal: 35),
                   unselectedLabelColor: AppColors.mainColor,
-                  tabs: const [
+                  tabs: [
                     Tab(
                       child: Text(
                         'SellerHome',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontFamily: 'Jua',
                         ),
                       ),
@@ -94,7 +73,7 @@ class _RestaurentHomeScreenState extends State<RestaurentHomeScreen>
                       child: Text(
                         'Orders',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontFamily: 'Jua',
                         ),
                       ),
@@ -103,20 +82,11 @@ class _RestaurentHomeScreenState extends State<RestaurentHomeScreen>
                       child: Text(
                         'Items',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontFamily: 'Jua',
                         ),
                       ),
                     ),
-                    // Tab(
-                    //   child: Text(
-                    //     'Histories',
-                    //     style: TextStyle(
-                    //       fontSize: 16,
-                    //       fontFamily: 'Jua',
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -125,17 +95,9 @@ class _RestaurentHomeScreenState extends State<RestaurentHomeScreen>
               child: TabBarView(
                 controller: tabController,
                 children: const [
-                  // ListView.builder(itemBuilder: (_, index) {
-                  //   return Container(
-                  //     //height: 300,
-                  //     //width: 200,
-                  //     child: HomeSellerTab(),
-                  //   );
-                  // }),
                   HomeSellerTab(),
                   OrdersTab(),
                   ItemsTab(),
-                  //OrderHistory()
                 ],
               ),
             ),

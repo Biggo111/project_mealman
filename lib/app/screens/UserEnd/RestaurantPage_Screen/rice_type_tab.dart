@@ -123,7 +123,7 @@ class _RiceTypeTabState extends State<RiceTypeTab> {
                             ],
                           ),
                           Text(
-                            data[index]['itemPrice'],
+                            "${data[index]['itemPrice']}Tk",
                             style: const TextStyle(
                               fontFamily: "Ubuntu",
                               fontSize: 16,
