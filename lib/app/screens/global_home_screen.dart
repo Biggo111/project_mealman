@@ -4,6 +4,8 @@ import 'package:project_mealman/app/Home_Page/gridview_item.dart';
 import 'package:project_mealman/app/Home_Page/myappbar.dart';
 import 'package:project_mealman/app/Home_Page/myappbar3.dart';
 import 'package:project_mealman/app/Home_Page/slide_view.dart';
+import 'package:project_mealman/app/core/app_colors.dart';
+import 'package:project_mealman/app/screens/UserEnd/Drawers/MyDrawer.dart';
 
 class GlobalHomeScreen extends StatefulWidget {
   const GlobalHomeScreen({super.key});
@@ -18,8 +20,23 @@ class _GlobalHomeScreenState extends State<GlobalHomeScreen> {
     final screenSize = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        appBar: MyAppBar3(
-          screenSize: screenSize,
+        drawer: const MyDrawer(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.menu, size: 40,),
+            color: AppColors.mainColor,
+            onPressed: (){
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+          title: const Text("MealMan", style: TextStyle(
+            letterSpacing: 4,
+            color: AppColors.mainColor,
+            fontFamily: "Jua",
+            fontSize: 40,
+          ),),
         ),
         body: Column(
           children: [

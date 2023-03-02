@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/Home_Page/myappbar.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPart/getRunningRestaurantDataList.dart';
+import 'package:project_mealman/app/screens/global_home_screen.dart';
 
 import '../../../Home_Page/myappbar3.dart';
 import '../../../core/app_colors.dart';
@@ -57,49 +59,55 @@ class _RestaurentListState extends State<RestaurentList> {
   Widget build(BuildContext context) {
     final restaurentScreenSize = MediaQuery.of(context).size.width;
     return SafeArea(
-      child: Scaffold(
-        drawer: const MyDrawer(),
-        backgroundColor: HexColor("EDDFDF"),
-        appBar: MyAppBar3(screenSize: restaurentScreenSize,),
-        // appBar: AppBar(
-        //   backgroundColor: HexColor("FE7C00"),
-        //   //foregroundColor: Colors.orange,
-
-        //   title: Title(
-        //     child: Text("Restaurants"),
-        //     color: Colors.white,
-        //   ),
-
-        //   // actions: [
-        //   //   IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
-        //   // ],
-
-        //   bottom: PreferredSize(
-        //     preferredSize: Size.fromHeight(50),
-        //     child: Padding(
-        //       padding: const EdgeInsets.all(10.0),
-        //       child: TextField(
-        //         decoration: InputDecoration(
-        //           hintText: "Search Restaurant",
-        //           prefixIcon: Icon(Icons.search),
-        //           contentPadding: EdgeInsets.symmetric(vertical: 0.0),
-        //           border: OutlineInputBorder(
-        //             borderRadius: BorderRadius.circular(30),
-        //             borderSide: BorderSide(color: Colors.white),
-        //           ),
-        //           filled: true,
-        //           fillColor: Colors.white,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              _getSlidingImage(),
-              _getRestaurantList(),
-            ],
+      child: WillPopScope(
+        onWillPop: ()async{
+          Get.to(()=>GlobalHomeScreen());
+          return false;
+        },
+        child: Scaffold(
+          drawer: const MyDrawer(),
+          backgroundColor: HexColor("EDDFDF"),
+          appBar: MyAppBar3(screenSize: restaurentScreenSize,),
+          // appBar: AppBar(
+          //   backgroundColor: HexColor("FE7C00"),
+          //   //foregroundColor: Colors.orange,
+      
+          //   title: Title(
+          //     child: Text("Restaurants"),
+          //     color: Colors.white,
+          //   ),
+      
+          //   // actions: [
+          //   //   IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
+          //   // ],
+      
+          //   bottom: PreferredSize(
+          //     preferredSize: Size.fromHeight(50),
+          //     child: Padding(
+          //       padding: const EdgeInsets.all(10.0),
+          //       child: TextField(
+          //         decoration: InputDecoration(
+          //           hintText: "Search Restaurant",
+          //           prefixIcon: Icon(Icons.search),
+          //           contentPadding: EdgeInsets.symmetric(vertical: 0.0),
+          //           border: OutlineInputBorder(
+          //             borderRadius: BorderRadius.circular(30),
+          //             borderSide: BorderSide(color: Colors.white),
+          //           ),
+          //           filled: true,
+          //           fillColor: Colors.white,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                _getSlidingImage(),
+                _getRestaurantList(),
+              ],
+            ),
           ),
         ),
       ),
