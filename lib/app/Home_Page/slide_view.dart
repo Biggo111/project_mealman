@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -38,7 +39,11 @@ class _SlideViewState extends State<SlideView> {
   double slider4ItemRating=5.0;
 
   Future<void>getSlider1value()async{
-    
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection("Cafeteria Menu").doc("Chicken Khichuri").get();
+    Map<String, dynamic> itemData = snapshot.data() as Map<String, dynamic>;
+
+    slider1ItemName = itemData['itemName'];
+    slider1ItemPrice = itemData['itemName'];
   }
 
 
@@ -175,7 +180,7 @@ class _SlideViewState extends State<SlideView> {
                     const SizedBox(
                       height: 20,
                     ),
-                    BigText(text: "Chease Burger"),
+                    BigText(text: "Chicken Khichuri"),
                     const SizedBox(
                       height: 20,
                     ),
@@ -204,7 +209,7 @@ class _SlideViewState extends State<SlideView> {
                           width: 50,
                         ),
                         Text(
-                          "Price: 50",
+                          "Price: 70",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
