@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import '../../core/app_colors.dart';
 import '../UserEnd/Drawers/MyDrawer.dart';
 //import 'package:image_uploader/widgets/drawer.dart';
-
+ 
 class SeeOrderPage extends StatefulWidget {
   String userName;
   String userEmail;
@@ -33,44 +33,47 @@ class SeeOrderPage extends StatefulWidget {
     required this.orderTime,
     required this.orderDate,
   });
-
+ 
   @override
   State<SeeOrderPage> createState() => _SeeOrderPageState();
 }
-
+ 
 class _SeeOrderPageState extends State<SeeOrderPage> {
   String timeNow = DateFormat('h:mm a').format(DateTime.now());
   String date = DateFormat('dd:MM:yyyy').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image:
-                  AssetImage("assets/restaurent_thumbnails/see_order_page.png"),
-              fit: BoxFit.cover)),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        drawer: MyDrawer(),
-        appBar: AppBar(
+    return SafeArea(
+      child: Container(
+        color: HexColor("EDDFDF"),
+        // decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //         image:
+        //             AssetImage("assets/restaurent_thumbnails/see_order_page.png"),
+        //         fit: BoxFit.cover)),
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          title: Text(
-            "Confirm Order",
-            style: TextStyle(fontSize: 20),
+          drawer: MyDrawer(),
+          appBar: AppBar(
+            backgroundColor: AppColors.mainColor,
+            title: Text(
+              "Confirm Order",
+              style: TextStyle(fontSize: 20,color:Colors.white),
+            ),
+            elevation: 0,
           ),
-          elevation: 0,
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _getOrderUsernameAndOrder(),
-                  ],
+          body: SingleChildScrollView(
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _getOrderUsernameAndOrder(),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -79,7 +82,7 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
       ),
     );
   }
-
+ 
   Widget _getOrderUsernameAndOrder() {
     Logger().i(widget.userName);
     return Container(
@@ -91,20 +94,25 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
           Text(
             widget.userName,
             style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
           ), //fetch from cart database
           SizedBox(
             height: 10,
           ),
           Text(
             "Ordered Item:",
-            style: TextStyle(fontSize: 25, color: Colors.white),
+            style: TextStyle(fontSize: 25, color: Colors.black),
           ),
           SizedBox(
             height: 10,
           ),
           Container(
-            height: 230,
+            decoration: BoxDecoration(
+               color: Colors.white,
+              borderRadius: BorderRadius.circular(20)
+            ),
+ 
+            height: 270,
             width: double.infinity,
             child: ListView.separated(
               padding: const EdgeInsets.all(2),
@@ -112,7 +120,7 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                   widget.items.length, // as per number of orders in database
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                  padding: const EdgeInsets.all(0.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: HexColor("FE7C00"),
@@ -158,7 +166,7 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
           SizedBox(
             height: 20,
           ),
-
+ 
           Container(
               height: 300,
               width: double.infinity,
@@ -297,7 +305,7 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
       ),
     ));
   }
-
+ 
   Widget _getOrderConfirmButton(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -342,7 +350,7 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                               //   Map<String, dynamic> data =
                               //       snapshot.data() as Map<String, dynamic>;
                               //   // Logger().i(snapshot.data());
-
+ 
                               //   _resName = data['name'];
                               // } else {
                               //   _resName = "No data found for the user";
