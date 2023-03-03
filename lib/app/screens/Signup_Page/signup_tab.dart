@@ -20,21 +20,37 @@ class _SignupTabState extends State<SignupTab> {
   final signupConfirmpasswordController = TextEditingController();
   final signupPhonenumberController = TextEditingController();
 
+  void signupUser() async {
+    if (signupPasswordController.text.toString() ==
+        signupConfirmpasswordController.text.toString()) {
+      FirebaseAuthMethods(FirebaseAuth.instance).signupWithEmail(
+          email: signupEmailController.text.trim(),
+          password: signupPasswordController.text.trim(),
+          name: signupNameController.text.trim(),
+          number: signupPhonenumberController.text.trim(),
+          context: context);
+    } else {
+      //Logger().i("Confirm password is not matching");
+      showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Error!'),
+                    content: const Text('Confirm Password is not matching to the password!'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+    }
+  }
 
- void signupUser()async{
-  if(signupPasswordController.text.toString()==signupConfirmpasswordController.text.toString()){
-    FirebaseAuthMethods(FirebaseAuth.instance).signupWithEmail(
-      email: signupEmailController.text, 
-      password: signupPasswordController.text,
-      name: signupNameController.text,
-      number: signupPhonenumberController.text,
-      context: context
-    );
-  }
-  else{
-    Logger().i("Confirm password is not matching");
-  }
-}
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -54,7 +70,9 @@ class _SignupTabState extends State<SignupTab> {
           controller: signupNameController,
           onChanged: (String value) {},
         ),
-        const SizedBox(height: 30,),
+        const SizedBox(
+          height: 30,
+        ),
         TextField(
           decoration: const InputDecoration(
             enabled: true,
@@ -70,7 +88,9 @@ class _SignupTabState extends State<SignupTab> {
           controller: signupEmailController,
           onChanged: (String value) {},
         ),
-        const SizedBox(height: 30,),
+        const SizedBox(
+          height: 30,
+        ),
         TextField(
           decoration: const InputDecoration(
             enabled: true,
@@ -85,7 +105,9 @@ class _SignupTabState extends State<SignupTab> {
           controller: signupPasswordController,
           onChanged: (String value) {},
         ),
-        const SizedBox(height: 30,),
+        const SizedBox(
+          height: 30,
+        ),
         TextField(
           decoration: const InputDecoration(
             enabled: true,
@@ -100,7 +122,9 @@ class _SignupTabState extends State<SignupTab> {
           controller: signupConfirmpasswordController,
           onChanged: (String value) {},
         ),
-        const SizedBox(height: 30,),
+        const SizedBox(
+          height: 30,
+        ),
         TextField(
           decoration: const InputDecoration(
             enabled: true,
@@ -116,14 +140,42 @@ class _SignupTabState extends State<SignupTab> {
           controller: signupPhonenumberController,
           onChanged: (String value) {},
         ),
-        const SizedBox(height: 30,),
+        const SizedBox(
+          height: 30,
+        ),
         SizedBox(
           height: 45,
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: (){
-              signupUser();
-              Get.to(()=>const LoginTab());
+            onPressed: () {
+              if(signupNameController.text.isEmpty || signupEmailController.text.isEmpty || signupPasswordController.text.isEmpty || signupConfirmpasswordController.text.isEmpty || signupPhonenumberController.text.isEmpty){
+                showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Alert!!'),
+                    content: const Text('Fill up all the fields'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+              }
+              else{
+                signupUser();
+              }
+              
+              //Get.to(()=>const LoginTab());
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const LoginTab()),
+              // );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.mainColor,

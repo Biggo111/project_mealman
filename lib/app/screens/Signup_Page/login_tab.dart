@@ -20,23 +20,23 @@ class _LoginTabState extends State<LoginTab> {
   final loginEmailController = TextEditingController();
   final loginPasswordController = TextEditingController();
   String? userType;
-  Future<void>loginUser() async {
+  Future<void> loginUser() async {
     await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
-      email: loginEmailController.text,
-      password: loginPasswordController.text,
+      email: loginEmailController.text.trim(),
+      password: loginPasswordController.text.trim(),
       context: context,
     );
-    User? user = FirebaseAuth.instance.currentUser;
-    if(user==null){
-      return;
-    }
-    userType = await FirebaseFirestore.instance.collection("Authenticated_User_Info").doc(user.uid).get().then((value)=>value.data()!['userType']);
+    // User? user = FirebaseAuth.instance.currentUser;
+    // if(user==null){
+    //   return;
+    // }
+    //userType = await FirebaseFirestore.instance.collection("Authenticated_User_Info").doc(user.uid).get().then((value)=>value.data()!['userType']);
     //user = firebaseAuthMethods.userID;
   }
 
   void passwordReset() {
     FirebaseAuthMethods(FirebaseAuth.instance).forgotPassword(
-      email: loginEmailController.text,
+      email: loginEmailController.text.trim(),
     );
   }
 
@@ -49,7 +49,7 @@ class _LoginTabState extends State<LoginTab> {
           const SizedBox(
             height: 30,
           ),
-          TextField(
+          TextFormField(
             decoration: const InputDecoration(
               enabled: true,
               suffixIcon: Icon(Icons.person),
@@ -62,12 +62,18 @@ class _LoginTabState extends State<LoginTab> {
             ),
             keyboardType: TextInputType.emailAddress,
             controller: loginEmailController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your email';
+              }
+              return null;
+            },
             onChanged: (String value) {},
           ),
           const SizedBox(
             height: 30,
           ),
-          TextField(
+          TextFormField(
             obscureText: true,
             decoration: const InputDecoration(
               enabled: true,
@@ -80,6 +86,12 @@ class _LoginTabState extends State<LoginTab> {
               ),
             ),
             controller: loginPasswordController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your email';
+              }
+              return null;
+            },
             onChanged: (String value) {},
           ),
           Padding(
@@ -94,7 +106,31 @@ class _LoginTabState extends State<LoginTab> {
                   color: Colors.black45,
                 ),
               ),
-              onPressed: () => passwordReset(),
+              onPressed: (){
+                if(loginEmailController.text.isEmpty){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Email Field Empty!'),
+                        content:
+                            const Text('Please Enter Your Email!'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+                else{
+                  passwordReset();
+                }
+              } 
             ),
           ),
           const SizedBox(
@@ -104,15 +140,29 @@ class _LoginTabState extends State<LoginTab> {
             height: 45,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () async{
-                await loginUser();
-                if (userType != null) {
-                  if(userType=='student' || userType=='teacher'){
-                    Get.to(()=>const GlobalHomeScreen());
-                  }
-                  else {
-                    Get.to(()=>RestaurentHomeScreen());
-                  }
+              onPressed: () async {
+                if (loginEmailController.text.isEmpty ||
+                    loginPasswordController.text.isEmpty) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Empty fields'),
+                        content:
+                            const Text('Please Enter Your Email and Password!'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  await loginUser();
                 }
               },
               style: ElevatedButton.styleFrom(

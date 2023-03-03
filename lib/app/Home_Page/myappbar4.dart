@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/addevent.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/credit_approval.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/order_history.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/order_history2.dart';
 import 'package:project_mealman/app/screens/UserEnd/Drawers/MyDrawer.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/Item_order_page/cart_page.dart';
+import 'package:project_mealman/app/screens/UserEnd/RestaurantPart/restaurant_list.dart';
  
 class MyAppBar4 extends StatefulWidget implements PreferredSizeWidget {
   double screenSize;
@@ -23,11 +26,13 @@ class _MyAppBar4State extends State<MyAppBar4> {
   void handleClick(String value) {//method for handling 3 dot button
     switch (value) {
       case 'MealCoin Req':
+      Navigator.of(context).push(MaterialPageRoute(builder: (c)=> CreditApproval()));//Mealcoin request page
         break;
       case 'Order History':
+       //Navigator.of(context).push(MaterialPageRoute(builder: (c)=> const OrderHistory2()));// Order history page
+       Get.to(()=> const OrderHistory2());
         break;
-      case 'Manage Event':
-        break;
+ 
     }
   }
  
@@ -39,7 +44,8 @@ class _MyAppBar4State extends State<MyAppBar4> {
     return Container(
       //height: widget.screenSize/4,
       height: kToolbarHeight * 1.9,
-      color: AppColors.mainColor,
+     // color: AppColors.mainColor,
+     color: HexColor("FF7E00"),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -65,22 +71,23 @@ class _MyAppBar4State extends State<MyAppBar4> {
               ),
  
               SizedBox(
-                width: 30,
+                width: 40,
               ),
  
               Container(//Here is the 3 dot button for appbar
                 //color: Colors.red,
                 width: 200,
-                height: 30,
+                height: 50,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     PopupMenuButton<String>(
-                      color: Colors.white,
+ 
+                      icon: Icon(Icons.more_vert, color: Colors.white,size: 30,),
  
                       onSelected: handleClick,
                       itemBuilder: (BuildContext context) {
-                        return {'MealCoin Req', 'Order history','Manage Event'}.map((String choice) {
+                        return {'MealCoin Req', 'Order History'}.map((String choice) {
                           return PopupMenuItem<String>(
                             value: choice,
                             child: Text(choice),
@@ -108,52 +115,52 @@ class _MyAppBar4State extends State<MyAppBar4> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(
-                height: 45,
-                width: 110,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    //Get.to(() => );
-                    Get.to(() => CreditApproval());
-                  },
-                  elevation: 2,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    "MealCoin Requests",
-                    style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 45,
-                width: 140,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    //Get.to(() => );
-                    Get.to(() => const OrderHistory2());
-                  },
-                  elevation: 2,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    "Orders History",
-                    style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 45,
+              //   width: 110,
+              //   child: FloatingActionButton(
+              //     onPressed: () {
+              //       //Get.to(() => );
+              //       Get.to(() => CreditApproval());
+              //     },
+              //     elevation: 2,
+              //     backgroundColor: Colors.white,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(10),
+              //     ),
+              //     child: const Text(
+              //       "MealCoin Requests",
+              //       style: TextStyle(
+              //         color: AppColors.mainColor,
+              //         fontFamily: 'Ubuntu',
+              //         fontSize: 15,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 45,
+              //   width: 140,
+              //   child: FloatingActionButton(
+              //     onPressed: () {
+              //       //Get.to(() => );
+              //       Get.to(() => const OrderHistory2());
+              //     },
+              //     elevation: 2,
+              //     backgroundColor: Colors.white,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(10),
+              //     ),
+              //     child: const Text(
+              //       "Orders History",
+              //       style: TextStyle(
+              //         color: AppColors.mainColor,
+              //         fontFamily: 'Ubuntu',
+              //         fontSize: 15,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 45,
                 width: 140,
@@ -211,3 +218,4 @@ class _MyAppBar4State extends State<MyAppBar4> {
     );
   }
 }
+ 
