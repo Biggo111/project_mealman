@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (BuildContext context, Widget? widget) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: RestaurentHomeScreen(),     
-        //home: SignupPage(),
+        //home: RestaurentHomeScreen(),     
+        home: SignupPage(),
         //home: GlobalHomeScreen(),
         //home: AddNewItem2(),
         //home: RestaurentList(),
