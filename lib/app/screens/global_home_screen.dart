@@ -17,7 +17,7 @@ class GlobalHomeScreen extends StatefulWidget {
 class _GlobalHomeScreenState extends State<GlobalHomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
+    //final screenSize = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         drawer: const MyDrawer(),
