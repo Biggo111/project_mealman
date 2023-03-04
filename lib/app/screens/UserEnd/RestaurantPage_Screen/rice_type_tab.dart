@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/Item_order_page/item_order.dart';
+import 'package:transparent_image/transparent_image.dart';
  
 class RiceTypeTab extends StatefulWidget {
   String restaurantName;
@@ -35,7 +37,7 @@ class _RiceTypeTabState extends State<RiceTypeTab> {
     Logger().i(menuList.length);
     return menuList;
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -65,7 +67,7 @@ class _RiceTypeTabState extends State<RiceTypeTab> {
             ),
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                padding: EdgeInsets.only(left: 8.0.w, right: 8.0.h),
                 child: GestureDetector(
                   onTap: () {
                     Get.to(
@@ -86,24 +88,24 @@ class _RiceTypeTabState extends State<RiceTypeTab> {
                   child: Card(
                     elevation: 2,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(20.0.r),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0.sp),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+                            padding: EdgeInsets.only(top: 8.0.w, left: 8.0.w),
                             child: Container(
                               //color: Colors.red,
-                              height: 50,
+                              height: 50.w,
                               width: double.infinity,
                               child: Text(
                                 data[index]['itemName'],
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontFamily: "Jua",
-                                  fontSize: 20,
+                                  fontSize: 20.sp,
                                 ),
                               ),
                             ),
@@ -129,34 +131,34 @@ class _RiceTypeTabState extends State<RiceTypeTab> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 10.w,
                           ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
+                                padding: EdgeInsets.only(left: 8.0.w),
                                 child: Text(
                                   data[index]['itemPrice'],
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontFamily: "Ubuntu",
-                                    fontSize: 20,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
+                                padding: EdgeInsets.only(left: 8.0.w),
                                 child: Container(
                                  // color: Colors.red,
                                   child: Text(
                                     "TK",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: "Ubuntu",
-                                      fontSize: 20,
+                                      fontSize: 20.sp,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -164,12 +166,12 @@ class _RiceTypeTabState extends State<RiceTypeTab> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 6.0, top: 6),
+                                     EdgeInsets.only(right: 6.0.h, top: 6.w),
                                 child: Container(
-                                  height: 75,
-                                  width: 75,
+                                  height: 75.w,
+                                  width: 75.w,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(20.r),
                                       image: DecorationImage(
                                         image: NetworkImage(data[index]['imageURL']),
                                         fit: BoxFit.cover 

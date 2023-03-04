@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -118,7 +119,7 @@ class _RestaurentListState extends State<RestaurentList> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(10.0.sp),
           child: InkWell(
             onTap: () {
               //print(currentIndex);
@@ -165,16 +166,16 @@ class _RestaurentListState extends State<RestaurentList> {
       actions: [IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))],
 
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(50),
+        preferredSize: Size.fromHeight(50.h),
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(10.0.sp),
           child: TextField(
             decoration: InputDecoration(
               hintText: "Search Restaurant",
               prefixIcon: Icon(Icons.search),
-              contentPadding: EdgeInsets.symmetric(vertical: 0.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 0.0.h),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(30.r),
                 borderSide: BorderSide(color: Colors.white),
               ),
               filled: true,
@@ -188,19 +189,19 @@ class _RestaurentListState extends State<RestaurentList> {
 
   Widget _getRestaurantList() {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(10.0.sp),
       child: Container(
-        height: 400,
+        height: 400.h,
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(15)),
+            color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0.sp),
                 child: Container(
-                  height: 380,
+                  height: 380.h,
                   width: double.infinity,
                   color: Colors.white,
                   //child: _getRunningRestaurantDataList(),

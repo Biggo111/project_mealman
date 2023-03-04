@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -21,13 +22,17 @@ import 'package:project_mealman/app/screens/global_home_screen.dart';
 import 'app/screens/RestaurentEnd/Controllers/resend_controller.dart';
 import 'app/screens/RestaurentEnd/restaurent_home_screen.dart';
 
-
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp]
+  );
   await FirebaseService.enableFirebase();
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
   //Get.put(ResEndController());
+  await ScreenUtil.ensureScreenSize();
   runApp(MyApp(auth: auth, firestore: firestore,));
   //runApp(const MyApp());
 }
@@ -57,7 +62,7 @@ class MyApp extends StatelessWidget {
         //home: OrderHistory(),
         //home: PermanentSplash()
       ),
-      designSize: const Size(412, 820),
+      designSize: const Size(411.42857142857144, 820.5714285714286),
     );
   }
 }
