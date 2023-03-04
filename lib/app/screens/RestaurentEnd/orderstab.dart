@@ -120,7 +120,7 @@ class _OrdersTabState extends State<OrdersTab> {
                             ),
                             Text(
                               // "${data[index]['timeNow']} ${data[index]['date']}"
-                              "$timeNow $date",
+                              "${data[index]['timeNow']} ${data[index]['date']}",
                               style: TextStyle(
                                 fontFamily: 'Ubuntu',
                                 fontSize: Diamensions.fontSize20,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class BigText extends StatelessWidget {
   Color? color;
   String text;
@@ -13,7 +14,7 @@ class BigText extends StatelessWidget {
       overflow: overflow,
       style: TextStyle(
         fontFamily: 'roboto',
-        fontSize: size,
+        fontSize: size.sp,
         fontWeight: FontWeight.w400,
       ),
     );

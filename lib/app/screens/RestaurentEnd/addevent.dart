@@ -1,102 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:hexcolor/hexcolor.dart';
-//import 'package:project_mealman/app/screens/RestaurentEnd/Controllers/AddEvent.dart';
-// import 'package:project_mealman/app/screens/RestaurentEnd/drawer.dart';
-// import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:logger/logger.dart';
-import 'package:project_mealman/app/screens/RestaurentEnd/allorder.dart';
-import 'package:project_mealman/app/screens/RestaurentEnd/eventorder.dart';
-
-import '../../core/app_colors.dart';
-
+import 'package:project_mealman/app/core/app_colors.dart';
+ 
 class AddEvent extends StatefulWidget {
   const AddEvent({super.key});
-
+ 
   @override
   State<AddEvent> createState() => _AddEventState();
 }
-
+ 
 class _AddEventState extends State<AddEvent> {
   String _date = "Not set";
   String _time = "Not set";
   String _resName = "";
   List<String> names = [];
-  TextEditingController Time = TextEditingController();
+  TextEditingController Deleevirytime = TextEditingController();
   TextEditingController EventTitle = TextEditingController();
   TextEditingController EndTime = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+  }
+ 
   Widget build(BuildContext context) {
     return Container(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            title: Expanded(
-                child: Row(
-              children: [
-                FutureBuilder(
-                    future: FirebaseFirestore.instance
-                        .collection("Authenticated_User_Info")
-                        .doc(FirebaseAuth.instance.currentUser!.uid)
-                        .get(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        _resName = snapshot.data!.data()!['name'];
-                        return Text(_resName);
-                      } else {
-                        return Container();
-                      }
-                    }),
-                    SizedBox(width: 70,),
-                    SizedBox(
-                height: 45,
-                width: 140,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    //Get.to(() => );
-                    Get.to(() => EventOrder());
-                  },
-                  elevation: 2,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    "Event Orders",
-                    style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
+      decoration: BoxDecoration(
+          // image: DecorationImage(
+          //     image: AssetImage("assets/userend_images/rice.jpg"),
+          //     fit: BoxFit.cover)
+              
               ),
-              ],
-            ))),
-        body: SingleChildScrollView(
-          child: Container(
-            decoration: (BoxDecoration(
-              color: Colors.white,
-              //borderRadius: BorderRadius.circular(15),
-            )),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      " Create your event",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    _getEventFormFields(),
-                  ],
+      child: SafeArea(
+        child: Scaffold(
+         // backgroundColor: Colors.transparent,
+          appBar: AppBar(
+              backgroundColor: AppColors.mainColor,
+              title: Expanded(
+                
+                  child: Row(
+                children: [
+                  FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection("Authenticated_User_Info")
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .get(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          _resName = snapshot.data!.data()!['name'];
+                          return Text(_resName);
+                        } else {
+                          return Container();
+                        }
+                      }),
+                  SizedBox(
+                    width: 70,
+                  ),
+                 
+                ],
+              ))),
+          body: SingleChildScrollView(
+            child: Container(
+              height: 760,
+              color: HexColor("EDDFDF"),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        " Create your event",
+                        style: TextStyle(fontSize: 25, color: AppColors.mainColor),
+                      ),
+                      _getEventFormFields(),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -105,50 +87,51 @@ class _AddEventState extends State<AddEvent> {
       ),
     );
   }
-
+ 
   Widget _getEventFormFields() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 600,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _getName(),
-              SizedBox(
-                height: 10,
-              ),
-              _getEventDate(),
-              SizedBox(
-                height: 10,
-              ),
-              _getEventTime(),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Select Items for event",
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              _getSubmitButton(context),
-              _getEventItemList(),
-            ],
+          height: 600,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
           ),
-        ),
-      ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _getName(),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  _geteventendtime(),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  _getDeliveryTime(),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  Text(
+                    "Select Items for event",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  _getEventItemList(),
+                  _getSubmitButton(context),
+                ],
+              ),
+            ),
+          )),
     );
   }
-
+ 
   Widget _getSubmitButton(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -174,29 +157,29 @@ class _AddEventState extends State<AddEvent> {
       ],
     );
   }
-
+ 
   Widget _getName() {
     return TextFormField(
       controller: EventTitle,
       decoration: const InputDecoration(labelText: "Enter Event Title"),
     );
   }
-
-  Widget _getEventTime() {
+ 
+  Widget _getDeliveryTime() {
     return TextFormField(
-        controller: Time,
-        decoration: const InputDecoration(labelText: "Enter dellivary time"));
+        controller: Deleevirytime,
+        decoration: const InputDecoration(labelText: "Delivery time"));
   }
-
-  Widget _getEventDate() {
+ 
+  Widget _geteventendtime() {
     return TextFormField(
         controller: EndTime,
-        decoration: const InputDecoration(labelText: "Enter Event end time "));
+        decoration: const InputDecoration(labelText: "End time"));
   }
-
+ 
   Widget _getEventItemList() {
     return Container(
-      height: 300,
+      // height: 300,
       width: double.infinity,
       child: FutureBuilder(
           future: FirebaseFirestore.instance.collection("$_resName Menu").get(),
@@ -214,79 +197,110 @@ class _AddEventState extends State<AddEvent> {
                           querySnapshot.docs;
                       List<Map> items =
                           documents.map((e) => e.data() as Map).toList();
-                      return ListView.builder(
-                          itemCount: items.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Map thisItem = items[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Padding(
+                      return SizedBox(
+                        height: 290,
+                        child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: items.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Map thisItem = items[index];
+                              return Padding(
                                 padding: const EdgeInsets.all(0.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white, //HexColor("FE7C00"),
-                                    borderRadius: BorderRadius.circular(15),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0.0, 1.0), //(x,y)
-                                        blurRadius: 6.0,
-                                      ),
-                                    ],
-                                  ),
-                                  height: 105,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          height: 80,
-                                          width: 80,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              color: Colors.white,
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                    "${thisItem['imageURL']}'"),
-                                              )),
+                                child: Column(
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            height: 80,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color: Colors.white,
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      "${thisItem['imageURL']}'"),
+                                                )),
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        '${thisItem['itemName']}',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: HexColor("FE7C00")),
-                                      ),
-                                      ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              primary: HexColor("FE7C00"),
-                                              elevation: 3,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0))),
-                                          onPressed: () {
-                                            names
+                                        Container(
+                                          height: 80,
+                                          width: 200,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${thisItem['itemName']}",
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ), //
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "${thisItem['itemPrice']}Tk  ",
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            HexColor("FE7C00")),
+                                                  ), //fetch from localdatabase from orderpage
+                                                  ElevatedButton(
+                                                      style: ElevatedButton.styleFrom(
+                                                          primary: HexColor(
+                                                              "FE7C00"),
+                                                          elevation: 3,
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15.0))),
+                                                      onPressed: () {
+                                                         names
                                                 .add("${thisItem['itemName']}");
                                             names.add(
                                                 "${thisItem['itemPrice']}");
                                             names
                                                 .add("${thisItem['imageURL']}");
                                             names.add(_resName);
-                                          },
-                                          child: Text(
-                                            "Add",
-                                          )),
-                                    ],
-                                  ),
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          content: Text(
+                                                              "${thisItem['itemName']} added to the card"),
+                                                        ));
+                                                      },
+                                                      child: Text(
+                                                        "Add",
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                        ),
+                                                      )),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
                                 ),
-                              ),
-                            );
-                          });
+                              );
+                            }),
+                      );
                     } else {
                       return Container();
                     }
@@ -297,7 +311,7 @@ class _AddEventState extends State<AddEvent> {
           }),
     );
   }
-
+ 
   Future Addevent() async {
     String eventtitle = EventTitle.text;
     eventtitle = _resName + eventtitle;
@@ -305,36 +319,45 @@ class _AddEventState extends State<AddEvent> {
         .collection('Resturnent Event')
         .doc('$eventtitle');
     print(eventtitle);
+    int hour = int.parse(EndTime.text.split('-')[0]);
+    int mint = int.parse(EndTime.text.split('-')[1]);
+    final now = DateTime.now();
+    final int endtime = DateTime(now.year, now.month, now.day, hour, mint)
+        .millisecondsSinceEpoch;
+    print(hour);
+    print(mint);
     final json = {
       'eventtitle': eventtitle,
-      'deliverytime': Time.text,
-      'endtime': EndTime.text,
+      'deliverytime': Deleevirytime.text,
+      'endtime': endtime,
       'returentname': _resName
     };
+    print(hour);
+    print(mint);
     docuser.set(json);
     int j = 0;
-
+    print("res name is $_resName");
     for (int i = 0; i < names.length; i++) {
       j++;
       if (j == 4) {
         String d = names[i - 3];
-        final docuse =
-            FirebaseFirestore.instance.collection("$eventtitle").doc('$d');
+        final docuse =   FirebaseFirestore.instance.collection("$eventtitle").doc('$d');
         final jsona = {
           'name': names[i - 3],
           'price': names[i - 2],
           'imageurl': names[i - 1],
           'returentname': names[i],
         };
+        print("added");
         docuse.set(jsona);
         j = 0;
       }
     }
-    //Logger().i("$UserName");
   }
-
+ 
   Future AddOrder() async {
     String eventtitle = EventTitle.text;
+    eventtitle = _resName + eventtitle;
     final docuse =
         FirebaseFirestore.instance.collection('$eventtitle menue').doc('ok');
     final jsona = {"name": "creation"};
