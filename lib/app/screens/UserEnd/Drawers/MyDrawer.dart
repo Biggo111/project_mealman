@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project_mealman/app/screens/Signup_Page/signup_page.dart';
@@ -35,7 +36,7 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(
               CupertinoIcons.profile_circled,
               color: Colors.white,
-              size: 40,
+              size: 40.sp,
             ),
 
             // title: Text("My Profile",style: TextStyle(fontSize: 25,color: Colors.white),),
@@ -51,7 +52,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 "My Profile",
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   color: Colors.white,
                 ),
               ),
@@ -66,7 +67,7 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(
               Icons.food_bank,
               color: Colors.white,
-              size: 40,
+              size: 40.sp,
             ),
             title: TextButton(
               onPressed: () {},
@@ -74,7 +75,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 "Become a seller",
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   color: Colors.white,
                 ),
               ),
@@ -87,7 +88,7 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(
               Icons.mail,
               color: Colors.white,
-              size: 40,
+              size: 40.sp,
             ),
             title: TextButton(
               onPressed: () {},
@@ -95,7 +96,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 "Invite a friend",
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   color: Colors.white,
                 ),
               ),
@@ -108,7 +109,7 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(
               Icons.contact_page,
               color: Colors.white,
-              size: 40,
+              size: 40.sp,
             ),
             title: TextButton(
               onPressed: () {},
@@ -129,7 +130,7 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(
               Icons.settings,
               color: Colors.white,
-              size: 40,
+              size: 40.sp,
             ),
             title: TextButton(
               onPressed: () {},
@@ -137,7 +138,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 "Settings",
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   color: Colors.white,
                 ),
               ),
@@ -150,7 +151,7 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(
               Icons.logout,
               color: Colors.white,
-              size: 40,
+              size: 40.sp,
             ),
             title: TextButton(
               onPressed: () async{
@@ -161,7 +162,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 "Logout",
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   color: Colors.white,
                 ),
               ),

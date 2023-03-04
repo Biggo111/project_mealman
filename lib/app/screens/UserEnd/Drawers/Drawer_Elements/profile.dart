@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 //import 'package:image_uploader/widgets/drawer.dart';
 
@@ -85,7 +86,7 @@ class _ProfileState extends State<Profile> {
                 _getUserPhoneCard(),
                 _getUserSocialMediaCard(),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0.sp),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -104,23 +105,23 @@ class _ProfileState extends State<Profile> {
   Widget _getProfilePicCard() {
     return Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15.0.r),
         ),
         elevation: 20,
         child: Container(
-          height: 200,
+          height: 200.w,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Padding(
-                padding: const EdgeInsets.all(0.0),
+                padding: EdgeInsets.all(0.0.sp),
                 child: CircleAvatar(
-                  radius: 70,
+                  radius: 70.r,
                   backgroundImage: AssetImage(
                       "assets/userend_images/profileLogo.png"),
                 ),
@@ -132,7 +133,7 @@ class _ProfileState extends State<Profile> {
                   Text(
                     myName,
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
@@ -140,7 +141,7 @@ class _ProfileState extends State<Profile> {
                       onPressed: () {},
                       icon: Icon(
                         Icons.camera_alt,
-                        size: 35,
+                        size: 35.sp,
                       ))
                 ],
               )
@@ -152,28 +153,28 @@ class _ProfileState extends State<Profile> {
   Widget _getUserNameCard() {
     return Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15.0.r),
         ),
         elevation: 20,
         child: Container(
-          height: 90,
+          height: 90.h,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   "Username",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20.sp),
                 ),
 
                 Text(
                   myName,
-                  style: TextStyle(fontSize: 15),
+                  style: TextStyle(fontSize: 15.sp),
                 ), //fetch from database
               ],
             ),
@@ -184,30 +185,30 @@ class _ProfileState extends State<Profile> {
   Widget _getUserEmailCard() {
     return Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15.0.r),
         ),
         elevation: 20,
         child: Container(
-          height: 90,
+          height: 90.h,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   "Email",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20.sp),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       myEmail,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 15.sp),
                     ),
                     //    IconButton(
                     // onPressed:(){
@@ -224,30 +225,30 @@ class _ProfileState extends State<Profile> {
   Widget _getUserPasswordCard() {
     return Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15.0.r),
         ),
         elevation: 20,
         child: Container(
-          height: 90,
+          height: 90.h,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   "User Type",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20.sp),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       myType,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 15.sp),
                     ),
                     //    IconButton(
                     // onPressed:(){
@@ -264,28 +265,28 @@ class _ProfileState extends State<Profile> {
   Widget _getUserPhoneCard() {
     return Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15.0.r),
         ),
         elevation: 20,
         child: Container(
-          height: 90,
+          height: 90.h,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   "Phone Number",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20.sp),
                 ),
 
                 Text(
                   myPhone,
-                  style: TextStyle(fontSize: 15),
+                  style: TextStyle(fontSize: 15.sp),
                 ), //fetch from database
               ],
             ),
@@ -296,23 +297,23 @@ class _ProfileState extends State<Profile> {
   Widget _getUserSocialMediaCard() {
     return Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15.0.r),
         ),
         elevation: 20,
         child: Container(
-          height: 90,
+          height: 90.h,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   "Connect Socials",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20.sp),
                 ),
                 Row(
                   children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
@@ -43,7 +44,8 @@ class _MyAppBar4State extends State<MyAppBar4> {
     final WidthofAppBar = MediaQuery.of(context).size.width;
     return Container(
       //height: widget.screenSize/4,
-      height: kToolbarHeight * 1.9,
+      //height: kToolbarHeight * 1.9,
+      height: 60.w,
      // color: AppColors.mainColor,
      color: HexColor("FF7E00"),
       child: Column(
@@ -55,7 +57,7 @@ class _MyAppBar4State extends State<MyAppBar4> {
             children: [
               IconButton(
                 icon: const Icon(Icons.menu),
-                iconSize: 40,
+                iconSize: 40.sp,
                 color: Colors.white,
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
@@ -66,24 +68,24 @@ class _MyAppBar4State extends State<MyAppBar4> {
                 style: TextStyle(
                   fontFamily: "Jua",
                   color: Colors.white,
-                  fontSize: 30,
+                  fontSize: 30.sp,
                 ),
               ),
  
               SizedBox(
-                width: 40,
+                width: 40.w,
               ),
  
               Container(//Here is the 3 dot button for appbar
                 //color: Colors.red,
-                width: 200,
-                height: 50,
+                width: 200.w,
+                height: 50.h,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     PopupMenuButton<String>(
  
-                      icon: Icon(Icons.more_vert, color: Colors.white,size: 30,),
+                      icon: Icon(Icons.more_vert, color: Colors.white,size: 30.sp,),
  
                       onSelected: handleClick,
                       itemBuilder: (BuildContext context) {
@@ -161,29 +163,29 @@ class _MyAppBar4State extends State<MyAppBar4> {
               //     ),
               //   ),
               // ),
-              SizedBox(
-                height: 45,
-                width: 140,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    //Get.to(() => );
-                    Get.to(() => const AddEvent());
-                  },
-                  elevation: 2,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    "Manage Event",
-                    style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 45.h,
+              //   width: 140.w,
+              //   child: FloatingActionButton(
+              //     onPressed: () {
+              //       //Get.to(() => );
+              //       Get.to(() => const AddEvent());
+              //     },
+              //     elevation: 2,
+              //     backgroundColor: Colors.white,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(10.r),
+              //     ),
+              //     child:  Text(
+              //       "Manage Event",
+              //       style: TextStyle(
+              //         color: AppColors.mainColor,
+              //         fontFamily: 'Ubuntu',
+              //         fontSize: 15.sp,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           // Container(
@@ -218,4 +220,3 @@ class _MyAppBar4State extends State<MyAppBar4> {
     );
   }
 }
- 

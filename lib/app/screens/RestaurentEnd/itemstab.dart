@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -96,7 +97,7 @@ class _ItemsTabState extends State<ItemsTab> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
+          padding: EdgeInsets.only(left: 10.w, right: 10.w),
           child: ListView.builder(
               itemCount: controller.menuList?.length ?? 0,
               itemBuilder: (_, index) {
@@ -121,7 +122,7 @@ class _ItemsTabState extends State<ItemsTab> {
                                 return Container(
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(30.r),
                                   ),
                                   child: Column(
                                     children: [
@@ -202,13 +203,13 @@ class _ItemsTabState extends State<ItemsTab> {
                                               return;
                                             }
                                           },
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.camera_alt,
-                                            size: 40,
+                                            size: 40.sp,
                                           )),
                                       SizedBox(
-                                        height: 45,
-                                        width: 300,
+                                        height: 45.h,
+                                        width: 300.w,
                                         child: FloatingActionButton(
                                           onPressed: () {
                                             if (updateNameController
@@ -249,13 +250,13 @@ class _ItemsTabState extends State<ItemsTab> {
                                           backgroundColor: AppColors.mainColor,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(40),
+                                                BorderRadius.circular(40.r),
                                           ),
-                                          child: const Text(
+                                          child: Text(
                                             "Add the updated Item",
                                             style: TextStyle(
                                               fontFamily: 'Ubuntu',
-                                              fontSize: 20,
+                                              fontSize: 20.sp,
                                             ),
                                           ),
                                         ),
@@ -282,12 +283,12 @@ class _ItemsTabState extends State<ItemsTab> {
                     ],
                   ),
                   child: Container(
-                    padding: const EdgeInsets.all(20),
-                    margin: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(20.sp),
+                    margin:  EdgeInsets.all(10.sp),
                     height: 140,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                         color: Colors.white,
                         //border: Border.all(),
                         boxShadow: const [
@@ -305,12 +306,12 @@ class _ItemsTabState extends State<ItemsTab> {
                       children: [
  
                         Container(
-                          height: 100,
-                          width: 100,
+                          height: 100.h,
+                          width: 100.h,
  
                           decoration: BoxDecoration(
                                color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20.r),
                             image: DecorationImage(image: NetworkImage("${document['imageURL']}"),
                              fit: BoxFit.cover,
  
@@ -333,8 +334,8 @@ class _ItemsTabState extends State<ItemsTab> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(
-                                left: 20,
+                              padding: EdgeInsets.only(
+                                left: 20.w,
                               ),
                               child: Row(
                                 mainAxisAlignment:
@@ -343,9 +344,9 @@ class _ItemsTabState extends State<ItemsTab> {
                                   Text(
                                     "${document['itemName']}",
                                     key: textKeys[index],
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontFamily: 'Ubuntu',
-                                      fontSize: 20,
+                                      fontSize: 20.sp,
                                       fontWeight: FontWeight.bold,
                                       color: AppColors.mainColor,
                                     ),
@@ -359,11 +360,11 @@ class _ItemsTabState extends State<ItemsTab> {
                             ),
                             Container(
                               padding: EdgeInsets.only(
-                                top: 10,
+                                top: 10.h,
                               ),
-                              margin: const EdgeInsets.only(left: 20),
-                              height: 50,
-                              width: 200,
+                              margin: EdgeInsets.only(left: 20.w),
+                              height: 50.h,
+                              width: 200.w,
                               child: SingleChildScrollView(
                                 child: Text(
                                   "${document['itemDescription']}",
@@ -371,23 +372,23 @@ class _ItemsTabState extends State<ItemsTab> {
                               ),
                             ),
                              Padding(
-                               padding: const EdgeInsets.only(left: 20),
+                               padding: EdgeInsets.only(left: 20.w),
                                child: Row(
                                  children: [
                                    Text(
                                           "${document['itemPrice']}",
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontFamily: 'Jua',
-                                            fontSize: 15,
+                                            fontSize: 15.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
  
                                     Text(
                                           "TK",
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontFamily: 'Jua',
-                                            fontSize: 15,
+                                            fontSize: 15.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -415,13 +416,13 @@ class _ItemsTabState extends State<ItemsTab> {
             },
             backgroundColor: AppColors.mainColor,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(40.r),
             ),
-            child: const Text(
+            child: Text(
               "Add Item",
               style: TextStyle(
                 fontFamily: 'Ubuntu',
-                fontSize: 20,
+                fontSize: 20.sp,
               ),
             ),
           ),

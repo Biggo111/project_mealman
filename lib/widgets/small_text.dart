@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SmallText extends StatelessWidget {
   Color? color;
   String text;
@@ -12,7 +13,7 @@ class SmallText extends StatelessWidget {
       text,
       style: TextStyle(
         fontFamily: 'roboto',
-        fontSize: size,
+        fontSize: size.sp,
         fontWeight: FontWeight.w400,
         height: hight,
       ),

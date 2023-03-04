@@ -34,74 +34,79 @@ class _RestaurentHomeScreenState extends State<RestaurentHomeScreen>
     //Logger().i(MediaQuery.of(context).size.height);
     //Logger().i(resName);
     return SafeArea(
-      child: Scaffold(
-        drawer: const MyDrawer(),
-        appBar: MyAppBar4(
-          screenSize: restaurentScreenSize,
-          resName: resName,
-        ),
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(Diamensions.paddingAll8),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Diamensions.borderRadius40),
-                  //border: Border.all(),
-                  color: Colors.white,
-                ),
-                child: TabBar(
-                  indicator: BoxDecoration(
+      child: WillPopScope(
+        onWillPop: ()async{
+          return false;
+        },
+        child: Scaffold(
+          drawer: const MyDrawer(),
+          appBar: MyAppBar4(
+            screenSize: restaurentScreenSize,
+            resName: resName,
+          ),
+          body: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(Diamensions.paddingAll8),
+                child: Container(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Diamensions.borderRadius40),
-                    color: AppColors.mainColor,
+                    //border: Border.all(),
+                    color: Colors.white,
                   ),
+                  child: TabBar(
+                    indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Diamensions.borderRadius40),
+                      color: AppColors.mainColor,
+                    ),
+                    controller: tabController,
+                    //isScrollable: true,
+                    //labelPadding: const EdgeInsets.symmetric(horizontal: 35),
+                    unselectedLabelColor: AppColors.mainColor,
+                    tabs: [
+                      Tab(
+                        child: Text(
+                          'Events', // it was the Sellerhome
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontFamily: 'Jua',
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Text(
+                          'Orders',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontFamily: 'Jua',
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Text(
+                          'Items',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontFamily: 'Jua',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
                   controller: tabController,
-                  //isScrollable: true,
-                  //labelPadding: const EdgeInsets.symmetric(horizontal: 35),
-                  unselectedLabelColor: AppColors.mainColor,
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        'SellerHome',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontFamily: 'Jua',
-                        ),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'Orders',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontFamily: 'Jua',
-                        ),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'Items',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontFamily: 'Jua',
-                        ),
-                      ),
-                    ),
+                  children: const [
+                    HomeSellerTab(),
+                    OrdersTab(),
+                    ItemsTab(),
                   ],
                 ),
               ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: const [
-                  HomeSellerTab(),
-                  OrdersTab(),
-                  ItemsTab(),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

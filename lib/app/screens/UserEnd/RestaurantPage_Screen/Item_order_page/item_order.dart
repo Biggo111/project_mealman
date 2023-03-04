@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project_mealman/app/screens/UserEnd/RestaurantPage_Screen/Item_order_page/cart_page.dart';
@@ -69,9 +70,9 @@ class _ItemOrderState extends State<ItemOrder> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 20,),
+              SizedBox(height: 20.h,),
               _getItemImageBig(),
-              SizedBox(height: 20,),
+              SizedBox(height: 20.h,),
               _getItemOrderInfo(),
             ],
           ),
@@ -82,11 +83,11 @@ class _ItemOrderState extends State<ItemOrder> {
  
   Widget _getItemImageBig() {
     return Container(
-      height: 250,
+      height: 250.h,
  
-      width:350,
+      width:350.w,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
           color: Colors.white,
           image: DecorationImage(
               image: NetworkImage(imageURL), //fetch image from database here
@@ -96,11 +97,11 @@ class _ItemOrderState extends State<ItemOrder> {
  
   Widget _getItemOrderInfo() {
     return Container(
-      height: 475,
+      height: 475.h,
       width: double.infinity,
       color: HexColor("FE7C00"),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0.sp),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +109,7 @@ class _ItemOrderState extends State<ItemOrder> {
             Text(
               itemName, //Fetch item name from database
               style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 25.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ), // Fetch item name here from database
@@ -130,17 +131,17 @@ class _ItemOrderState extends State<ItemOrder> {
       children: [
         Text(
           "Quantity",
-          style: TextStyle(color: Colors.white, fontSize: 25),
+          style: TextStyle(color: Colors.white, fontSize: 25.sp),
         ),
         SizedBox(
-          width: 25,
+          width: 25.w,
         ),
         Container(
-            height: 40,
-            width: 130,
+            height: 40.h,
+            width: 130.w,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(30.r),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -157,7 +158,7 @@ class _ItemOrderState extends State<ItemOrder> {
                     )),
                 Text(
                   "$quantity",
-                  style: TextStyle(color: HexColor("FE7C00"), fontSize: 20),
+                  style: TextStyle(color: HexColor("FE7C00"), fontSize: 20.sp),
                 ),
                 IconButton(
                     onPressed: () {
@@ -198,7 +199,7 @@ class _ItemOrderState extends State<ItemOrder> {
   Widget _getDescription() {
     return Text(
       itemDescription,
-      style: TextStyle(color: Colors.white, fontSize: 15),
+      style: TextStyle(color: Colors.white, fontSize: 15.sp),
     );
   }
  
@@ -207,17 +208,17 @@ class _ItemOrderState extends State<ItemOrder> {
       children: [
         Text(
           "Adds On",
-          style: TextStyle(color: Colors.white, fontSize: 25),
+          style: TextStyle(color: Colors.white, fontSize: 25.sp),
         ),
         SizedBox(
-          width: 20,
+          width: 20.w,
         ),
         IconButton(
             onPressed: () {},
             icon: Icon(
               Icons.add_circle_rounded,
               color: Colors.white,
-              size: 35,
+              size: 35.sp,
             ))
       ],
     );
@@ -230,7 +231,7 @@ class _ItemOrderState extends State<ItemOrder> {
         children: [
           Text(
             "Total",
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style: TextStyle(fontSize: 20.sp, color: Colors.white),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -238,7 +239,7 @@ class _ItemOrderState extends State<ItemOrder> {
               Text(
                 "${int.parse(itemPrice)*quantity}TK",
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
@@ -255,16 +256,16 @@ class _ItemOrderState extends State<ItemOrder> {
                 child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(30.r),
                     ),
                     child: Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0.sp),
                           child: Text(
                             "Add to Cart",
                             style: TextStyle(
-                                color: HexColor("FE7C00"), fontSize: 20),
+                                color: HexColor("FE7C00"), fontSize: 20.sp),
                           ),
                         ),
                         IconButton(
@@ -294,8 +295,8 @@ class _ItemOrderState extends State<ItemOrder> {
   Widget _getBuildRating() {
     return RatingBar.builder(
         minRating: 1,
-        itemSize: 40,
-        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+        itemSize: 40.sp,
+        itemPadding: EdgeInsets.symmetric(horizontal: 4.0.w),
         itemBuilder: (context, _) => Icon(
               Icons.star,
               color: Colors.amber,
@@ -338,8 +339,8 @@ class _ItemOrderState extends State<ItemOrder> {
     return RatingBar.builder(
       initialRating:
           rating, //fetch average rating number of this item from database here
-      itemSize: 30,
-      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+      itemSize: 30.sp,
+      itemPadding: EdgeInsets.symmetric(horizontal: 4.0.w),
       itemBuilder: (context, _) => Icon(
         Icons.star,
         color: Colors.amber,

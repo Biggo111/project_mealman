@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
@@ -23,6 +24,26 @@ class _SignupTabState extends State<SignupTab> {
   void signupUser() async {
     if (signupPasswordController.text.toString() ==
         signupConfirmpasswordController.text.toString()) {
+          if((signupEmailController.text.trim()!="syedshafkatulhassan@gmail.com") && (signupEmailController.text.trim()!="ruhanahmed1256@gmail.com")){
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Access Denied!'),
+                    content: const Text('You cannot join as a restaurant owner! Use your university email'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+              return;
+          }
       FirebaseAuthMethods(FirebaseAuth.instance).signupWithEmail(
           email: signupEmailController.text.trim(),
           password: signupPasswordController.text.trim(),
@@ -57,94 +78,94 @@ class _SignupTabState extends State<SignupTab> {
       physics: const BouncingScrollPhysics(),
       children: [
         TextField(
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             enabled: true,
             suffixIcon: Icon(Icons.person),
             hintText: "Enter Username",
             hintStyle: TextStyle(
               color: Colors.black38,
               fontFamily: 'Ubuntu',
-              fontSize: 20,
+              fontSize: 20.sp,
             ),
           ),
           controller: signupNameController,
           onChanged: (String value) {},
         ),
-        const SizedBox(
-          height: 30,
+         SizedBox(
+          height: 30.h,
         ),
         TextField(
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             enabled: true,
             suffixIcon: Icon(Icons.email),
-            hintText: "Enter your email",
+            hintText: "Enter your university mail",
             hintStyle: TextStyle(
               color: Colors.black38,
               fontFamily: 'Ubuntu',
-              fontSize: 20,
+              fontSize: 20.sp,
             ),
           ),
           keyboardType: TextInputType.emailAddress,
           controller: signupEmailController,
           onChanged: (String value) {},
         ),
-        const SizedBox(
-          height: 30,
+        SizedBox(
+          height: 30.h,
         ),
         TextField(
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             enabled: true,
             suffixIcon: Icon(Icons.lock),
             hintText: "Enter password",
             hintStyle: TextStyle(
               color: Colors.black38,
               fontFamily: 'Ubuntu',
-              fontSize: 20,
+              fontSize: 20.sp,
             ),
           ),
           controller: signupPasswordController,
           onChanged: (String value) {},
         ),
-        const SizedBox(
-          height: 30,
+        SizedBox(
+          height: 30.h,
         ),
         TextField(
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             enabled: true,
             suffixIcon: Icon(Icons.lock),
             hintText: "Confirm password",
             hintStyle: TextStyle(
               color: Colors.black38,
               fontFamily: 'Ubuntu',
-              fontSize: 20,
+              fontSize: 20.sp,
             ),
           ),
           controller: signupConfirmpasswordController,
           onChanged: (String value) {},
         ),
-        const SizedBox(
-          height: 30,
+        SizedBox(
+          height: 30.h,
         ),
         TextField(
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             enabled: true,
             suffixIcon: Icon(Icons.call),
             hintText: "Enter your phone number",
             hintStyle: TextStyle(
               color: Colors.black38,
               fontFamily: 'Ubuntu',
-              fontSize: 20,
+              fontSize: 20.sp,
             ),
           ),
           keyboardType: TextInputType.number,
           controller: signupPhonenumberController,
           onChanged: (String value) {},
         ),
-        const SizedBox(
-          height: 30,
+        SizedBox(
+          height: 30.h,
         ),
         SizedBox(
-          height: 45,
+          height: 45.h,
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
@@ -180,14 +201,14 @@ class _SignupTabState extends State<SignupTab> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.mainColor,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40),
+                borderRadius: BorderRadius.circular(40.r),
               ),
             ),
-            child: const Text(
+            child: Text(
               "Signup",
               style: TextStyle(
                 fontFamily: 'Ubuntu',
-                fontSize: 20,
+                fontSize: 20.sp,
               ),
             ),
           ),

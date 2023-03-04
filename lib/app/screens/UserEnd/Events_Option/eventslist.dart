@@ -1,160 +1,182 @@
+//All the event list
 import 'package:flutter/material.dart';
-//import 'package:flutter/src/widgets/framework.dart';
-//import 'package:flutter/src/widgets/placeholder.dart';
-//import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:logger/logger.dart';
-//import 'package:project_mealman/app/screens/UserEnd/RestaurantPart/emenue.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project_mealman/app/screens/UserEnd/Events_Option/eventmenulist.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
  
-class EventsList extends StatefulWidget {
-  const EventsList({super.key});
+class EventListForUser extends StatefulWidget {
+  const EventListForUser({super.key});
  
   @override
-  State<EventsList> createState() => _EventsListState();
+  State<EventListForUser> createState() => _EventListForUserState();
 }
  
-class _EventsListState extends State<EventsList> {
-  String name = "";
+class _EventListForUserState extends State<EventListForUser> {
+  void loader() async {
+    while (true) {
+      await Future.delayed(const Duration(milliseconds: 50));
+      await FirebaseFirestore.instance
+          .collection("Resturnent Event")
+          .get()
+          .then((value) {
+        value.docs.forEach((element) {
+          final map = element.data();
+          if (DateTime.now().compareTo(
+                  DateTime.fromMillisecondsSinceEpoch(map['endtime'])) >
+              0) {
+            FirebaseFirestore.instance
+                .collection('Resturnent Event')
+                .doc(element.id)
+                .delete();
+          }
+        });
+      });
+    }
+  }
  
   @override
+  void initState() {
+    loader();
+    super.initState();
+  }
+ 
+  String formatTime(int milisec) =>
+      DateTime.fromMillisecondsSinceEpoch(milisec).toString().substring(10, 16);
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Here are all the resturent event list"),
-        backgroundColor: HexColor("FE7C00"),
-      ),
-      body: Container(
- 
-            decoration: (BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/userend_images/rice.jpg"),
-                  fit: BoxFit.cover),
-              color: Color.fromARGB(255, 219, 210, 207),
-              //borderRadius: BorderRadius.circular(15),
-            )),
-        child: FutureBuilder(
-            future:
-                FirebaseFirestore.instance.collection("Resturnent Event").get(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                CollectionReference _reference =
-                    FirebaseFirestore.instance.collection("Resturnent Event");
-                return StreamBuilder<QuerySnapshot>(
-                    stream: _reference.snapshots(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        QuerySnapshot querySnapshot = snapshot.data;
-                        List<QueryDocumentSnapshot> documents =
-                            querySnapshot.docs;
-                        List<Map> items =
-                            documents.map((e) => e.data() as Map).toList();
-                        return ListView.builder(
-                            itemCount: items.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              Map thisItem = items[index];
-                              return Container(
-                                height: 150,
-                                width: 100,
-                                padding: const EdgeInsets.all(8.0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Card(
- 
-                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(180)),
- 
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: HexColor("FE7C00"),
-                                        ),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Container(
-                                                alignment: Alignment.center,
-                                                height: 100,
-                                                width: 100,
-                                                child: Text(
-                                                    '${thisItem['eventtitle']}',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                              ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                height: 100,
-                                                width: 100,
-                                                child: Text(
-                                                    'End:${thisItem['endtime']}',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                              ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                height: 100,
-                                                width: 100,
-                                                child: Text(
-                                                    'Delivary Time:${thisItem['deliverytime']}',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                              )
-                                            ]),
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => EventMenuList(
-                                                      '${thisItem['eventtitle']}')));
-                                          check(
-                                              '${thisItem['endtime']}',
-                                              '${thisItem['deliverytime']}',
-                                              '${thisItem['eventtitle']}');
-                                        }),
-                                  ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: HexColor("FE7C00"),
+          title: const Text("Running Events"),
+        ),
+        body: Column(
+          children: [
+            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: FirebaseFirestore.instance
+                  .collection('Resturnent Event')
+                  .snapshots(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  QuerySnapshot querySnapshot = snapshot.data;
+                  List<QueryDocumentSnapshot> documents = querySnapshot.docs;
+                  List<Map> items =
+                      documents.map((e) => e.data() as Map).toList();
+                  return Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: items.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Map thisItem = items[index];
+                        return Padding(
+                          padding: EdgeInsets.all(5.0.sp),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white, //HexColor("FE7C00"),
+                              borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(20.r)),
+                              boxShadow: const[
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(0.0, 1.0), //(x,y)
+                                  blurRadius: 6.0,
                                 ),
-                              );
-                            });
-                      } else {
-                        return Container();
-                      }
-                    });
-              } else {
-                return const CircularProgressIndicator();
-              }
-            }),
+                              ],
+                            ),
+                            height: 100.w,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: 50.h,
+                                      width: 200.w,
+                                      decoration: BoxDecoration(
+                                          color: HexColor("FE7C00"),
+                                          borderRadius: BorderRadius.only(
+                                              bottomRight:
+                                                  Radius.circular(20.r))),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 12.0.w, top: 12.0.h),
+                                        child: Text(
+                                          "${thisItem['eventtitle']}",
+                                          style: TextStyle(
+                                              fontSize: 25.sp,
+                                              color: Colors.white),
+                                        ), //Fetch event name in this text
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 8.0.w),
+                                      child: TextButton(
+                                        onPressed: (() {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => EventUserEnd(
+                                                  username:
+                                                      '${thisItem['eventtitle']}'),
+                                            ),
+                                          );
+                                        }),
+                                        child: Text(
+                                          "See Event",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 12.0.w, top: 12.0.h),
+                                      child: Text(
+                                        "End : ${formatTime(thisItem['endtime'])}",
+                                        style: TextStyle(
+                                            fontSize: 20.sp, color: Colors.black),
+                                      ), //Fetch event name in this text
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 12.0.w, bottom: 12.0.h),
+                                      child: Text(
+                                        "Delivery : ${thisItem['deliverytime']}",
+                                        style: TextStyle(
+                                            fontSize: 20.sp, color: Colors.black),
+                                      ), //Fetch event delivery in this text
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }
- 
-  Future remove(title) async {
-    FirebaseFirestore.instance
-        .collection('Resturnent Event')
-        .doc(title)
-        .delete();
-  }
- 
-  void check(String endtime, String deleverytime, String eventtitle) {
-    var today = DateTime.now();
-    int hour = today.hour;
-    int minute = today.minute;
-    List<String> okstring = endtime.split('.');
-    if (okstring.length == 1) {
-      okstring.add("0");
-    }
-    String Hour = okstring[0];
-    String Minute = okstring[1];
-    int Hourr = int.parse(Hour);
-    int Minutee = int.parse(Minute);
-    print(okstring);
-    if (hour >= Hourr) {
-      if (minute >= Minutee) {
-        remove(eventtitle);
-      }
-    }
-  }
 }
+ 
