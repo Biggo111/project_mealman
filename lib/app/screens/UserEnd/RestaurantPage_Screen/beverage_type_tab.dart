@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
  
@@ -66,7 +67,7 @@ class _BeverageTypeTabState extends State<BeverageTypeTab> {
             ),
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                padding: EdgeInsets.only(left: 8.0.w, right: 8.0.w),
                 child: GestureDetector(
                   onTap: (){
                     Get.to(()=>ItemOrder(
@@ -81,24 +82,24 @@ class _BeverageTypeTabState extends State<BeverageTypeTab> {
                   child: Card(
                    elevation: 2,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(20.0.r),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0.sp),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top:8.0,left: 8.0),
+                            padding: EdgeInsets.only(top:8.0.h,left: 8.0.w),
                             child: Container(
                               //color: Colors.red,
-                              height: 50,
+                              height: 50.h,
                               width: double.infinity,
                               child: Text(
                                 data[index]['itemName'],
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontFamily: "Jua",
-                                  fontSize: 20,
+                                  fontSize: 20.sp,
                                 ),
                               ),
                             ),
@@ -108,7 +109,7 @@ class _BeverageTypeTabState extends State<BeverageTypeTab> {
                               scale: 0.8,
                               child: RatingBar.builder(
                                 initialRating: 3,
-                                itemSize: 20,
+                                itemSize: 20.sp,
                                 minRating: 1,
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
@@ -124,34 +125,34 @@ class _BeverageTypeTabState extends State<BeverageTypeTab> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 10.h,
                           ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
+                                padding: EdgeInsets.only(left: 8.0.w),
                                 child: Text(
                                   data[index]['itemPrice'],
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontFamily: "Ubuntu",
-                                    fontSize: 20,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
+                                padding: EdgeInsets.only(left: 8.0.w),
                                 child: Container(
                                   //color: Colors.red,
                                   child: Text(
                                     "TK",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: "Ubuntu",
-                                      fontSize: 20,
+                                      fontSize: 20.sp,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -159,10 +160,10 @@ class _BeverageTypeTabState extends State<BeverageTypeTab> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 6.0, top: 6),
+                                     EdgeInsets.only(right: 6.0.w, top: 6.h),
                                 child: Container(
-                                  height: 75,
-                                  width: 75,
+                                  height: 75.w,
+                                  width: 75.h,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(

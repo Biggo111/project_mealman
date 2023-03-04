@@ -219,12 +219,12 @@ class _AddNewItem2State extends State<AddNewItem2> {
             ));
             return;
           }
-          // if (imageurl.isEmpty) {
-          //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          //     content: Text("Please Upload an Image"),
-          //   ));
-          //   return;
-          // }
+          if (imageurl.isEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("Please Upload an Image"),
+            ));
+            return;
+          }
           // creatIteam(iteamControler.text, priceController.text,
           //     quantityController.text,itemDescriptionController.text);
           final item = ItemModel(
@@ -280,10 +280,11 @@ class _AddNewItem2State extends State<AddNewItem2> {
     Container(
         //use image picker and then preview the image on the preview container
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(imageurl,),
-            fit: BoxFit.cover 
-          ),
+          border: Border.all(color: HexColor("FE7C00")),
+           image: DecorationImage(
+                    image: FileImage(File(_imageFile!.path)),
+                    fit: BoxFit.cover,
+                  ),
         ),
         ),
     );

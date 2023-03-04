@@ -9,6 +9,7 @@ import 'package:project_mealman/widgets/big_text.dart';
 import 'package:project_mealman/widgets/small_text.dart';
 
 import '../Utils/diamensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SlideView extends StatefulWidget {
   const SlideView({super.key});
@@ -87,8 +88,8 @@ class _SlideViewState extends State<SlideView> {
         Container(
           //color: Colors.purple,
           padding:
-              const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 2),
-          height: MediaQuery.of(context).size.height / 3.1,
+               EdgeInsets.only(top: 5.h, left: 15.w, right: 15.w, bottom: 2.h),
+          height: 265.h,//MediaQuery.of(context).size.height / 3.1,
           child: FutureBuilder(
             //future: getSlider1value(),
             builder: (context, snapshot){
@@ -110,7 +111,7 @@ class _SlideViewState extends State<SlideView> {
             size: const Size.square(9.0),
             activeSize: const Size(18.0, 9.0),
             activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
+                borderRadius: BorderRadius.circular(5.r)),
           ),
         ),
       ],
@@ -127,19 +128,28 @@ class _SlideViewState extends State<SlideView> {
       sliderRestaurantName = "Cafeteria";
     }
     else if(index==1){
-
+      sliderItemName = "Mini Burger";
+      sliderItemPrice = "40";
+      sliderItemRating = 3.5;
+      sliderRestaurantName = "Cafeteria";
     }
     else if(index==2){
-
+      sliderItemName = "Sandwich";
+      sliderItemPrice = "50";
+      sliderItemRating = 5.0;
+      sliderRestaurantName = "Cafeteria";
     }
     else if(index==3){
-
+      sliderItemName = "Pizza";
+      sliderItemPrice = "60";
+      sliderItemRating = 4.0;
+      sliderRestaurantName = "Cafeteria";
     }
     else if(index==4){
-
-    }
-    else{
-
+      sliderItemName = "Shingara";
+      sliderItemPrice = "7";
+      sliderItemRating = 5.0;
+      sliderRestaurantName = "Cafeteria";
     }
 
     Matrix4 matrix = Matrix4.identity();
@@ -174,14 +184,26 @@ class _SlideViewState extends State<SlideView> {
           if(index==0){
             Get.to(()=> ItemOrder(itemName: "Chicken Khichuri", itemDescription: "It is one of the rice types items. We provide two pieces of chicken and enough in quantity rice with it", itemPrice: "70", imageURL: "https://firebasestorage.googleapis.com/v0/b/project-mealman.appspot.com/o/images%2Fdata%2Fuser%2F0%2Fcom.example.project_mealman%2Fcache%2FEggKhichuri.jpeg?alt=media&token=2222211d-06f1-4fd9-82e9-afc94190f929", restaurantName: "Cafeteria"));
           }
+          if(index==1){
+            Get.to(()=> ItemOrder(itemName: "Mini Burger", itemDescription: "It is one of the fast food types items. It is good enough to kill your hunger!", itemPrice: "40", imageURL: "https://firebasestorage.googleapis.com/v0/b/project-mealman.appspot.com/o/images%2Fdata%2Fuser%2F0%2Fcom.example.project_mealman%2Fcache%2Fsandwitch.jpeg?alt=media&token=8e669a2a-6b2e-46f3-bf10-10ad05f22baa", restaurantName: "Cafeteria"));
+          }
+          if(index==2){
+            Get.to(()=> ItemOrder(itemName: "Sandwich", itemDescription: "It is one of the fast food types items. It is good enough to kill your hunger!", itemPrice: "50", imageURL: "https://firebasestorage.googleapis.com/v0/b/project-mealman.appspot.com/o/images%2Fdata%2Fuser%2F0%2Fcom.example.project_mealman%2Fcache%2Fsandwitch.jpeg?alt=media&token=8e669a2a-6b2e-46f3-bf10-10ad05f22baaa", restaurantName: "Cafeteria"));
+          }
+          if(index==3){
+            Get.to(()=> ItemOrder(itemName: "Pizza", itemDescription: "It is one of the fast food types items. It is good enough to kill your hunger!", itemPrice: "60", imageURL: "https://firebasestorage.googleapis.com/v0/b/project-mealman.appspot.com/o/images%2Fdata%2Fuser%2F0%2Fcom.example.project_mealman%2Fcache%2FPizza.jpeg?alt=media&token=5d71a9c7-9a73-41d0-83d1-1e010e8ae09e", restaurantName: "Cafeteria"));
+          }
+          if(index==4){
+            Get.to(()=> ItemOrder(itemName: "Shingara", itemDescription: "It is one of the fast food types items. We provide the best one among all!", itemPrice: "7", imageURL: "https://firebasestorage.googleapis.com/v0/b/project-mealman.appspot.com/o/images%2Fdata%2Fuser%2F0%2Fcom.example.project_mealman%2Fcache%2Fsingara.jpeg?alt=media&token=fb0f3a2e-b22a-401e-9406-5e84b0d59bf9", restaurantName: "Cafeteria"));
+          }
         },
         child: Stack(
           children: [
             Container(
-              height: Diamensions.pageviewContainer1,
-              margin: const EdgeInsets.only(left: 10, right: 10),
+              height: 190.h,
+              margin: EdgeInsets.only(left: 10.w, right: 10.w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(30.r),
                 //color: Colors.amber,
                 image: DecorationImage(
                   image: AssetImage(slidingImageList[index]["image_path"]),
@@ -192,10 +214,10 @@ class _SlideViewState extends State<SlideView> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: Diamensions.pageviewContainer2,
-                margin: const EdgeInsets.only(left: 40, right: 40, bottom: 8),
+                height: 140.h,
+                margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 8.h),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.r),
                     color: Colors.white,
                     boxShadow: const [
                       BoxShadow(
@@ -209,18 +231,19 @@ class _SlideViewState extends State<SlideView> {
                       ),
                     ]),
                 child: Container(
-                  padding: const EdgeInsets.all(5),
+                  padding: EdgeInsets.all(5.sp),
                   //height: 140,
                   width: double.maxFinite,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
-                      BigText(text: "Chicken Khichuri"),
-                      const SizedBox(
-                        height: 20,
+                      BigText(text: sliderItemName),
+                      //Text("Chicken Khichuri", style: TextStyle(fontSize: 20.sp),),
+                       SizedBox(
+                        height: 20.h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -233,7 +256,7 @@ class _SlideViewState extends State<SlideView> {
                               return Icon(
                                 Icons.star,
                                 color: AppColors.mainColor,
-                                size: 15,
+                                size: 15.sp,
                               );
                             }),
                           ),
@@ -241,21 +264,21 @@ class _SlideViewState extends State<SlideView> {
                           //   width: 10,
                           // ),
                           SmallText(
-                            text: "4.5",
+                            text: sliderItemRating.toString(),
                           ),
-                          const SizedBox(
-                            width: 50,
+                          SizedBox(
+                            width: 50.w,
                           ),
                           Text(
-                            "70 Tk",
+                            "$sliderItemPrice TK",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
+                      SizedBox(
+                        height: 20.h,
                       ),
-                      BigText(text: "Cafeteria"),
+                      BigText(text: sliderRestaurantName),
                     ],
                   ),
                 ),

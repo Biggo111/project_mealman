@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:logger/logger.dart';
+import 'package:project_mealman/app/screens/RestaurentEnd/order_history2.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/orderstab.dart';
 import 'package:project_mealman/app/screens/RestaurentEnd/restaurent_home_screen.dart';
 import 'package:intl/intl.dart';
@@ -65,7 +67,7 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
           body: SingleChildScrollView(
             child: Container(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0.sp),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -87,44 +89,44 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
     Logger().i(widget.userName);
     return Container(
         child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(8.0.sp),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             widget.userName,
             style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
+                fontSize: 25.sp, fontWeight: FontWeight.bold, color: Colors.black),
           ), //fetch from cart database
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
           Text(
             "Ordered Item:",
-            style: TextStyle(fontSize: 25, color: Colors.black),
+            style: TextStyle(fontSize: 25.sp, color: Colors.black),
           ),
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
           Container(
             decoration: BoxDecoration(
                color: Colors.white,
-              borderRadius: BorderRadius.circular(20)
+              borderRadius: BorderRadius.circular(20.r)
             ),
  
-            height: 270,
+            height: 270.h,
             width: double.infinity,
             child: ListView.separated(
-              padding: const EdgeInsets.all(2),
+              padding: EdgeInsets.all(2.sp),
               itemCount:
                   widget.items.length, // as per number of orders in database
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0.sp),
                   child: Container(
                     decoration: BoxDecoration(
                       color: HexColor("FE7C00"),
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
@@ -133,9 +135,9 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                         ),
                       ],
                     ),
-                    height: 60,
+                    height: 60.h,
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.0.h),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,15 +145,15 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                           //get all data from cart for the following texts
                           Text(
                             "${widget.items[index]['quantity']}X",
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 20.sp, color: Colors.white),
                           ),
                           Text(
                             widget.items[index]["itemName"],
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 20.sp, color: Colors.white),
                           ),
                           Text(
                             "${widget.items[index]['itemPrice']}TK",
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 20.sp, color: Colors.white),
                           ),
                         ],
                       ),
@@ -164,17 +166,17 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 20.h,
           ),
  
           Container(
-              height: 300,
+              height: 300.w,
               width: double.infinity,
               decoration: BoxDecoration(
                   color: HexColor("FE7C00"),
-                  borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(20.r)),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0.sp),
                 child: Column(
                   children: [
                     Row(
@@ -182,32 +184,32 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                         Text(
                           "Phone: ",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
                         Text(
                           widget.userPhone, //get from database
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20.sp, color: Colors.white),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     Row(
                       children: [
                         Text(
                           "Email: ",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
                         Expanded(
                           child: Text(
                             widget.userEmail, //get from database
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 20.sp, color: Colors.white),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -215,27 +217,27 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     Row(
                       children: [
                         Container(
-                          height: 75,
-                          width: 100,
+                          height: 75.h,
+                          width: 100.w,
                           child: Text(
                             "Location:",
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 20.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
                         ),
                         Container(
-                          height: 75,
-                          width: 200,
+                          height: 75.h,
+                          width: 200.w,
                           child: Text(
                             widget.userLocation, //get from database
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 20.sp, color: Colors.white),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -247,13 +249,13 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                         Text(
                           "Payment Method: ",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
                         Text(
                           widget.paymentMethod,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20.sp, color: Colors.white),
                         )
                       ],
                     ),
@@ -262,20 +264,20 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                         Text(
                           "Order Time: ",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
                         Text(
                           widget.orderTime,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20.sp, color: Colors.white),
                         ),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         Text(
                           widget.orderDate,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20.sp, color: Colors.white),
                         )
                       ],
                     ),
@@ -284,18 +286,18 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                         Text(
                           "Total: ",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
                         Text(
                           "${widget.totalPrice}TK",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20.sp, color: Colors.white),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 20.sp,
                     ),
                     _getOrderConfirmButton(context),
                   ],
@@ -311,13 +313,13 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: 300,
+          width: 300.w,
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 elevation: 3.0,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
+                    borderRadius: BorderRadius.circular(30.0.r)),
               ),
               onPressed: () {
                 setState(() {
@@ -325,16 +327,16 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text(
+                        title: Text(
                           "Order Confirmed",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "Jua"),
                         ),
-                        content: const Text(
+                        content: Text(
                           "Please Get The Order Ready!",
-                          style: TextStyle(fontSize: 17, fontFamily: "Ubuntu"),
+                          style: TextStyle(fontSize: 17.sp, fontFamily: "Ubuntu"),
                         ),
                         actions: <Widget>[
                           TextButton(
@@ -360,7 +362,7 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
                               //         .collection("$_resName Orders")
                               //         .doc()
                               //         .delete();
-                              Get.to(() => RestaurentHomeScreen());
+                              Get.to(() => const OrderHistory2());
                             },
                             child: const Text(
                               'OK',
@@ -375,7 +377,7 @@ class _SeeOrderPageState extends State<SeeOrderPage> {
               },
               child: Text(
                 "Confirm Order",
-                style: TextStyle(fontSize: 20, color: HexColor("FE7C00")),
+                style: TextStyle(fontSize: 20.sp, color: HexColor("FE7C00")),
               )),
         ),
       ],

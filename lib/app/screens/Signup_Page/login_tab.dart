@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:project_mealman/app/core/app_colors.dart';
@@ -46,18 +47,18 @@ class _LoginTabState extends State<LoginTab> {
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: 30.h,
           ),
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               enabled: true,
               suffixIcon: Icon(Icons.person),
               hintText: "Enter email",
               hintStyle: TextStyle(
                 color: Colors.black38,
                 fontFamily: 'Ubuntu',
-                fontSize: 20,
+                fontSize: 20.sp,
               ),
             ),
             keyboardType: TextInputType.emailAddress,
@@ -70,19 +71,19 @@ class _LoginTabState extends State<LoginTab> {
             },
             onChanged: (String value) {},
           ),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: 30.h,
           ),
           TextFormField(
             obscureText: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               enabled: true,
               suffixIcon: Icon(Icons.lock),
               hintText: "Enter Password",
               hintStyle: TextStyle(
                 color: Colors.black38,
                 fontFamily: 'Ubuntu',
-                fontSize: 20,
+                fontSize: 20.sp,
               ),
             ),
             controller: loginPasswordController,
@@ -95,8 +96,8 @@ class _LoginTabState extends State<LoginTab> {
             onChanged: (String value) {},
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 155,
+            padding: EdgeInsets.only(
+              left: 155.w,
             ),
             child: TextButton(
               child: const Text(
@@ -133,11 +134,11 @@ class _LoginTabState extends State<LoginTab> {
               } 
             ),
           ),
-          const SizedBox(
-            height: 50,
+           SizedBox(
+            height: 50.h,
           ),
           SizedBox(
-            height: 45,
+            height: 45.h,
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () async {
@@ -171,11 +172,11 @@ class _LoginTabState extends State<LoginTab> {
                   borderRadius: BorderRadius.circular(40),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 "Login",
                 style: TextStyle(
                   fontFamily: 'Ubuntu',
-                  fontSize: 20,
+                  fontSize: 20.sp,
                 ),
               ),
             ),
