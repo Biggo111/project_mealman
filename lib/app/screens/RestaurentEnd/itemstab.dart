@@ -341,14 +341,19 @@ class _ItemsTabState extends State<ItemsTab> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
-                                    "${document['itemName']}",
-                                    key: textKeys[index],
-                                    style: TextStyle(
-                                      fontFamily: 'Ubuntu',
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.mainColor,
+                                  Container(
+                                    width: 200,
+                                    child: Text(
+                                      "${document['itemName']}",
+                                      key: textKeys[index],
+                                      style: TextStyle(
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.mainColor,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                   // const SizedBox(
@@ -408,8 +413,8 @@ class _ItemsTabState extends State<ItemsTab> {
               }),
         ),
         floatingActionButton: SizedBox(
-          height: 45,
-          width: 385,
+          height: 45.h,
+          width: 385.w,
           child: FloatingActionButton(
             onPressed: () {
               Get.to(() => const AddNewItem2());

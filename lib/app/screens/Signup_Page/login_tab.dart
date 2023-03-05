@@ -97,7 +97,7 @@ class _LoginTabState extends State<LoginTab> {
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: 155.w,
+              left: 125.w,
             ),
             child: TextButton(
               child: const Text(
