@@ -230,10 +230,10 @@ class _AddNewItem2State extends State<AddNewItem2> {
           final item = ItemModel(
             itemName: iteamNameController.text.trim(),
             itemDespriction: itemDescriptionController.text.trim(), 
-            itemPrice: double.parse(priceController.text.trim()),
+            itemPrice: priceController.text.trim(),
             //imageURL: _imageFile != null ? _imageFile!.path.toString() : '',
             imageURL: imageurl,
-            category: categoryController.text.trim(),
+            category: dropdownvalue,
           );
           
           //Logger().i(item.itemName);

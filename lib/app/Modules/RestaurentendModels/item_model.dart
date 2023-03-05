@@ -3,7 +3,7 @@ class ItemModel {
   String? id;
   String itemName;
   String itemDespriction;
-  double itemPrice;
+  String itemPrice;
   String imageURL;
   String category;
   ItemModel({

@@ -24,26 +24,26 @@ class _SignupTabState extends State<SignupTab> {
   void signupUser() async {
     if (signupPasswordController.text.toString() ==
         signupConfirmpasswordController.text.toString()) {
-          if((signupEmailController.text.trim()!="syedshafkatulhassan@gmail.com") && (signupEmailController.text.trim()!="ruhanahmed1256@gmail.com")){
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Access Denied!'),
-                    content: const Text('You cannot join as a restaurant owner! Use your university email'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
-              return;
-          }
+          // if((signupEmailController.text.trim()!="syedshafkatulhassan@gmail.com") && (signupEmailController.text.trim()!="ruhanahmed1256@gmail.com")){
+          //   showDialog(
+          //       context: context,
+          //       builder: (BuildContext context) {
+          //         return AlertDialog(
+          //           title: const Text('Access Denied!'),
+          //           content: const Text('You cannot join as a restaurant owner! Use your university email'),
+          //           actions: [
+          //             TextButton(
+          //               onPressed: () {
+          //                 Navigator.of(context).pop();
+          //               },
+          //               child: const Text('OK'),
+          //             ),
+          //           ],
+          //         );
+          //       },
+          //     );
+          //     return;
+          // }
       FirebaseAuthMethods(FirebaseAuth.instance).signupWithEmail(
           email: signupEmailController.text.trim(),
           password: signupPasswordController.text.trim(),
