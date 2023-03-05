@@ -354,7 +354,7 @@ class _CartPageState extends State<CartPage> {
                               },
                             );
                           }
-                          if(dropdownvalue=='Bkash'){
+                          if(dropdownvalue=='Bkash' || dropdownvalue=='Mealcoin'){
                             return showDialog(
                               context: context,
                               builder: (BuildContext context) {

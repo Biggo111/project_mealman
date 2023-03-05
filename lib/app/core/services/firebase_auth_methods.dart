@@ -32,18 +32,23 @@ class FirebaseAuthMethods {
         email: email,
         password: password,
       )
-          .then((UserCredential userCredential) {
+          .then((UserCredential userCredential) async {
+        //await userCredential.user!.sendEmailVerification();
+        //waiting for the user to be verified
+        //await userCredential.user!.reload();
+
         String userId = userCredential.user!.uid;
         String name = checkName;
         String phone = checknumber;
         userID = userId;
-        //Logger().i(userID);
+        //Logger().i("My user ID is : $userID");
+
         if (email.startsWith("cse_") && email.endsWith("@lus.ac.bd")) {
           userType = "student";
         } else if (email.endsWith("@lus.ac.bd")) {
           userType = "teacher";
         } else {
-          userType = "restaurant";
+          userType = "restaurant_required";
         }
 
         Map<String, dynamic> userData = {
@@ -54,18 +59,41 @@ class FirebaseAuthMethods {
           "userType": userType,
           "createdAt": DateTime.now()
         };
+
         FirebaseFirestore.instance
             .collection("Authenticated_User_Info")
             .doc(userId)
             .set(userData);
+        // if (userCredential.user!.emailVerified) {
+        // } else {
+        //   showDialog(
+        //     context: context,
+        //     builder: (BuildContext context) {
+        //       return AlertDialog(
+        //         title: const Text('Verify your email!'),
+        //         content:
+        //             const Text('Check your email and verify it to sign up!'),
+        //         actions: [
+        //           TextButton(
+        //             onPressed: () {
+        //               Navigator.of(context).pop();
+        //             },
+        //             child: const Text('OK'),
+        //           ),
+        //         ],
+        //       );
+        //     },
+        //   );
+        // }
       });
+      await sendEmailVerification(context);
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Signup Successful'),
+            title: const Text('Signup Successful BUT...'),
             content: const Text(
-                'You have successfully signed up! Now go the loginPage and login...'),
+                'An email is sent to you, you have to verify this and then go to the loginPage and login...'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -77,14 +105,13 @@ class FirebaseAuthMethods {
           );
         },
       );
-      //await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
       //Logger().i(e.message.toString());
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Used Email!'),
+            title: const Text('Error!'),
             content: Text("${e.message.toString()}"),
             actions: [
               TextButton(
@@ -118,6 +145,27 @@ class FirebaseAuthMethods {
       );
       User? user = userCredential.user;
       if (user != null) {
+        if (!user.emailVerified) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Please Verify!'),
+                content: const Text(
+                    'Please verify with your email. We sent you an email while signing up'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+          return;
+        }
         userType = await FirebaseFirestore.instance
             .collection("Authenticated_User_Info")
             .doc(user.uid)
@@ -126,8 +174,27 @@ class FirebaseAuthMethods {
         if (userType != null) {
           if (userType == 'student' || userType == 'teacher') {
             Get.to(() => const GlobalHomeScreen());
-          } else {
+          } else if (userType == 'restaurant') {
             Get.to(() => const RestaurentHomeScreen());
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Verification Required!'),
+                  content: const Text(
+                      'If you are a restaurant owner you will be verified!'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
           }
         }
       } else {

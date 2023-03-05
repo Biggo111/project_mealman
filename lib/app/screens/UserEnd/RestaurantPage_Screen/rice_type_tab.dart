@@ -140,7 +140,7 @@ class _RiceTypeTabState extends State<RiceTypeTab> {
                               Padding(
                                 padding: EdgeInsets.only(left: 8.0.w),
                                 child: Text(
-                                  data[index]['itemPrice'],
+                                  data[index]['itemPrice'].toString(),
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontFamily: "Ubuntu",
