@@ -18,7 +18,7 @@ class _PermanentSplashState extends State<PermanentSplash> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(seconds: 5)).then((value){
+    Future.delayed(const Duration(seconds: 3)).then((value){
       Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=> const SignupPage()));
     });
   }

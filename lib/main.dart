@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? widget) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         //home: RestaurentHomeScreen(),     
-        home: SignupPage(),
+        //home: SignupPage(),
         //home: GlobalHomeScreen(),
         //home: AddNewItem2(),
         //home: RestaurentList(),
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         //home: ItemOrder(),
         //home: SeeOrderPage(),
         //home: OrderHistory(),
-        //home: PermanentSplash()
+        home: PermanentSplash()
       ),
       designSize: const Size(411.42857142857144, 820.5714285714286),
     );

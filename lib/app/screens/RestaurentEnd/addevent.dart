@@ -242,6 +242,8 @@ class _AddEventState extends State<AddEvent> {
                                                     fontSize: 20,
                                                     fontWeight:
                                                         FontWeight.bold),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow.ellipsis,
                                               ), //
                                               Row(
                                                 mainAxisAlignment:
